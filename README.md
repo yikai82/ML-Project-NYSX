@@ -1,4 +1,4 @@
-# NYSE — Next-Day / Next-Week Stock Prediction
+# NYSE — Next-Day Stock Prediction
 
 **Project goal:** Build a simple, reproducible baseline that predicts (a) whether a stock's closing price will go up/down next day (classification) and (b) the next-week return (regression). Keep the project open for other experiments via PRs.
 
