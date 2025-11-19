@@ -19,7 +19,7 @@
 > 1. 
 > -->
 
-> [!importantce]
+> [!IMPORTANT]  
 >   
 > Hello, 
 >
