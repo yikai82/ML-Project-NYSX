@@ -52,8 +52,9 @@ Hardware: Intel® Core™ i9-9880H CPU @ 2.30GHz, 16 GM RAM
 
 ## 1. Business Problem: 
 
-
-Our client recently experienced market losses triggered by a high-profile tweet. <img src="images/trump_tweet.jpg" width="250" align="right" style="margin-right: 20px;"> 
+<img src="images/trump_tweet.jpg" width="350" align="right" style="margin-left: 40px;"> 
+<p>
+Our client recently experienced market losses triggered by a high-profile tweet. 
 To improve their ability to respond to sudden shifts, the client wants to explore 
 LSTM-based stock prediction models. Instead of maintaining one model per stock, 
 they’re interested in whether a sector-level model could learn shared patterns 
