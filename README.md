@@ -9,28 +9,48 @@
   </h1>
 
 > [!IMPORTANT]  
-> <i><h3 align="center">Most of the business problems are not ML problems, and most of the ML problems are not business problems. Optimizing an ML model is not the same thing as optimizing a solution for a business problem </h3><p>  
-> <h4 align="right"> - from Production Lecture Day 1 : 36:58</h4><p>
+> <i><h4 align="center">Most of the business problems are not ML problems, and most of the ML problems are not business problems. Optimizing an ML model is not the same thing as optimizing a solution for a business problem </h3><p>  
+> <h5 align="right"> - from Production Lecture Day 1 : 36:58</h5><p>
 >
-> <h3 align="center">A Machine Learning System is a system that can learn automatically to improve its performance</h3></i>    
->  
+> <h4 align="center">A Machine Learning System is a system that can learn automatically to improve its performance</h5></i>    
+> <br>  
+>
 > This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.
 
 ---
 
 <p align="center">
-  <a href="#key-note-and-important-concept">Key Notes</a> •
-  <a href="URL">Fly to Course Recording</a> •
-  <a href="#resources">Resouces</a><br>
+  <a href="">Repo Layout</a> •
+  <a href="">Enviroment Setup</a> •
+  <a href="">Resouces</a><br>
   <br>
-  **Enter Text<br>
+  **Continue Reading 👇**<br>
 </p>
 
+---
+## System
+
+<div align="left">
+  <div style="margin: 2px 0;">
+    <img src="images/Linux2.svg" alt="Linux" width="50" style="vertical-align: middle; margin-right: 6px;">
+    <span style="vertical-align: middle;"><b>Kubuntu-T2 24.04.2 LTS</b></span>
+  </div>
+  <div style="margin: 2px 0;">
+    <img src="images/Noble.svg" alt="Noble" width="50" style="vertical-align: middle; margin-right: 6px;">
+    <span style="vertical-align: middle;">Codename: Noble</span>
+  </div>
+</div>  
+
+Release: 24.04  
+Kernel Version: Linux 6.14.0-1-t2-noble  
+Hardware: Intel® Core™ i9-9880H CPU @ 2.30GHz, 16 GM RAM 
 
 ---
-LSTM = Long Short-Term Memory | ML = Machine Learning 
+**LSTM** = Long Short-Term Memory | **ML** = Machine Learning 
+<br>
 
-## Business Problem: 
+
+## 1. Business Problem: 
 
 <table>
 <tr>
@@ -50,25 +70,131 @@ Our client recently experienced market losses triggered by a high-profile tweet.
 
 **Project goal**: Build a simple LSTM models to forecast next-day stock prices, compare their performance, and evaluate whether a single sector-level model can match the performance of stock-specific models.
 
----
 
-## 2. Repo layout
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
+
+---
+## 2. Repo Layout
 
 ```text
-
-
-
-
-
+.
+├── AAPL_example.html
+├── data
+├── demo
+├── experiments
+├── html
+├── images
+├── LICENSE
+├── models
+├── production
+├── README.md
+├── requirements.txt
+├── results
+└── src
 ```
----
 
-## 3. Environment setup (Git Bash / Windows)
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
+
+---
+## 3. Environment Setup 
+
+⚠️ My system is Linux (Kubuntu24.04.02 LTS) on a MBP2019 [here](#system). For NVIDIA GPU users: Install CUDA toolkit and drivers appropriate for your GPU before creating the Conda environment.
+
+
+
+### 3.1 Install `dsi_participant` environment with Miniconda
+
+- Visit the [Miniconda nstallation Page](https://www.anaconda.com/docs/getting-started/miniconda/main) 
+
+- Choose and download the appropriate installer based on your system architecture:
+
+- Open a terminal in the folder where the installer was downloaded.
+
+- Run the installer:
+
+```bash 
+bash Miniconda3-latest-Linux-<your_architecture>.sh
+```
+
+- Follow the on-screen instructions. When asked, say “yes” to initializing Conda.
+- Confirm the installation:
 
 ```bash
-# create & activate venv in Git Bash
-python -m venv .venv
-source .venv/Scripts/activate
+conda --version
+```
 
-# install minimal packages
+- You should see something like conda 23.x.x.
+
+- Now following the following command one-by0one in terminal to install the required package.
+
+```bash
+conda create --name dsi_participant python=3.9 # create a new conda environment 
+
+conda activate dsi_participant # activate the new conda enviroment 
+
+conda install -c conda-forge numpy requests ipykernel pandas seaborn scikit-learn python-dotenv dask "pyarrow>=11.0.0" sacred sqlalchemy psycopg2 shap fancyimpute missingno tensorflow matplotlib plotly nbformat scikit-image opencv transformers yfinance pygam pybind11
+
+conda list # this should return a list where you can save as txt for future reference. 
+``` 
+
+### 3.2 Set up environment with a clean envirmental.yml
+
+- I exported my conda environment(`ml_env_complete.yml`) and added to the repo here, which should be a cleaning a guarantee work around
+
+
+```bash
+
+## Option 1: For conda user
+cd path/to/the/folder 
+conda env create -f environment.yml # This will create a conda enviroment with the same name defined in the environmet.yml. 
+                                    # In this case, the name will be "ml_env_complete" 
+
+## Option 2: For python venv user  
+python -m venv myenv # replace [myenv] to whatever name you like
+
+# for Linux / Mac
+source myenv/bin/activate
+
+# for Windows
+myenv\Scripts\activate
+
+# install virtual environment 
+pip install -r ml_env_complete.txt
+
+```
+
+### 3.3 Set up minimum environment with a minimum.yml
+
+Same step as below just replace the `ml_env_complete` to `requirement` for either yml file or text file based on your setting. 
+
+```bash
+
+## Option 1: For conda user
+cd path/to/the/folder 
+conda env create -f requirements.yml # This will create a conda enviroment with the same name defined in the environmet.yml. 
+                                    # In this case, the name will be "ml_env_complete" 
+
+## Option 2: For python venv user  
+python -m venv myenv # replace [myenv] to whatever name you like
+
+# for Linux / Mac
+source myenv/bin/activate
+
+# for Windows
+myenv\Scripts\activate
+
+# install virtual environment 
 pip install -r requirements.txt
+```
+
+
+
+
+
+## Reference
+1. [How to Set up dsi_participant environment with Miniconda](https://github.com/yikai82/UofT_DSI_onboarding/blob/093064b03e664b48f3252efa3f7a238e98e3a0d4/environment_setup/tech_onboarding_linux.md#miniconda) 
+
+2. 
+
+3. 
