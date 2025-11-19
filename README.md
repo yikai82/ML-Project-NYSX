@@ -62,8 +62,8 @@ Our client recently experienced market losses triggered by a high-profile tweet.
 
 </td>
 
-<td style="width: 150px; padding-left: 20px;">
-  <img src="images/trump tweetjpg" width="500">
+<td style="width: 400px; padding-left: 20px;">
+  <img src="images/trump tweetjpg" width="400 px">
 </td>
 </tr>
 </table>
