@@ -3,33 +3,126 @@
 </p> -->
 
 <h1 align="center">
-  Yi-Kai's AI/ML New York Stock Exchange <b>Producion</b> Zone 🏭⚙️ <br>
+  Yi-Kai's AI/ML New York Stock Exchange <br>Producion Zone ⛑️ 🏭 <br>
   </h1>
 
+<p align="center"> 
+  <a href="/experiments/Readme.md">Experiments Play Zone 🛝 </a> •
+  <!-- <a href="URL">Enter Text Here</a> • -->
+  <a href="/README.md">Main Page 🏠
+</a><br> 
+</p>
+
+
+Hello, 
+
+Welcome to the **production** ⛑️ 🏭 zone, where you can find the instructions on how to run the production code using **MLflow**. I also spent time documenting all the mistakes I made or challenges I was facing, and how I solved them (If I was able to ...😅). It helps me get better, and I hope it helps you too!
+
+## Update log:  
+- 2025-11-18: initial version
+
+
 ## Content  
-* [Experiment Note](#experiment-note)   
-* [1. 🏛️ Libraries 🏛️]()  
-<!-- * [2. ⚔️🛡️ PLAY BOOK](#) -->
-* [3. Resources](#resources) 
+* [1. Production Challenges](#production-challenges-log-)   
+
+* [2. Cheat sheet for post-production work](#cheat-sheet-for-post-production-work)
+
+* [Resources](#resources) 
 
 
 
-## Recent Update:  
+---
+
+## 1. Production Error/Challenges Log 📕
+- Inconsistency of the target column for the Input X or Y: 
+
+    The exercise here is to use past price as input X and to predict future price, whether we choose open price, close price, or the high price. It is important to write the code as robustly as possible. During the initial base model evaluation, the `x_input` only contains one variable — the past `close` price, so the column index is 0. However, after feature engineering, the input now contains 10 features: open, high, low, close, volume, vol_change(%), 7-day returns, streak up, streak down, and range ratio. Thus, the `close` column has been shifted to column index = 3. The issue has been addressed by implementing the following code:
+
+<br>
+
+```python
+# 1. print all the column and its index for the data frame we are intersted in 
+for idx, col in enumerate(df.columns):
+    print(idx, col)
+
+# 2. assign target_col to the target we want, in this case `close```
+target_col = df.columns.get_loc('close')
+print(f"Target: close; Column index = {target_col}")
+
+```
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
+
+---
+
+- Small, yet details always matters
+    
+    When running experiments in **MLflow**, it is important to have a strategy to ensure all the experiment variables and paths are set correctly so the output goes to the correct destination. For example, if the experiment ID is `Run_2`, obviously, we don't want the outcome from `Run_2` to end up in the `Run_1` folder. In the worst case, **overwrite** what is in Run_1. 
+
+    **Solution:**   
+    (a) Implement a small comment section at the top of code as a checklist and test with a **test** script    
+
+    ```python
+
+    ##### Evaluation of LSTM with Multiple Stocks ver04.4
+
+    #### ⚠️ Checklist before commit your code to run ⚠️ ####
+    ## 1. Check for Run Number : Run_X: 3 places, RunX: 2 places
+    ## 2. Check the Batch Number : batch/Batch: {2 places}
+    ## 3. Confirm target_col = [correct target] before commit the run 
+
+    ``` 
+    <br>
+    (b) Create a test script and test_folder, testing everything, then replace the test_folder with the actual intended folder. 
 
 
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
-## Production Challenges Log 📑
-I just write down all the mistakes I made or challenges I was facing, and how I solve it. It helps me to get better and I hope it helps you too!
+---
 
-1. Target Column for the Input
+3. The mystery of duplication in the **MLflow** run  
+
+    During the testing phase, when only one ticker was selected to run in MLflow, I got two run results in MLflow: the first one only lasted for 7-10s while the second one is the actual run. After debugging, this was a very common indentation problem. When doing multiple MLflow runs, it is important to have a proper indentation.  
+
+    ```python
+    ### Example ### 
+
+    for Tick in Batch_1: 
+
+        # Some code here.....
+        with mlflow.start_run(run_name=RUN_NAME, experiment_id=exp_id, nested = False):
+
+            # log ticker as a tag instead of using run_name....
+            mlflow.set_tag("ticker", Tick)
+            mlflow.set_tag("version", "LSTM_ver04.3")
+
+            # ...some code here.... 
+           
+            def add_stock_features(df):
+                # ... some code here....
+                return df
+                # =========================================================================== #
+         
+            ##### >>> 3 Train LSTM : 3 different seeds o see if the model stable >> consistency result 
+            from tqdm import tqdm
+            metrics=[]
+            histories=[]
+            predictions=[]
+            seeds=[111,222,333]
+
+            for i in tqdm(range(3)):   ## <<< correct indent
+                random.seed(seeds[i])
+                np.random.seed(seeds[i])
+                tf.random.set_seed(seeds[i])
+
+    ``` 
 
 
-2. Small but yet details 
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
 
+---
 
-
-
-## Coding Helper after production is done 
+## 2. Cheat sheet for post-production work  
 
 ### Bash
 
@@ -144,37 +237,22 @@ combined_df.to_csv("all_stocks_metrics_run3.csv", index=False)
 ```
 
 
----
-
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
 
----
+<!-- ---
 ## 2. ⚔️🛡️ PLAY BOOK
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
 
-
----
-### 2.1
-
-```python
-# Enter code here
-
-```
-
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
 
-
----
-## 3. Function List  
-
-
-
-<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
-
+ -->
 
 ---
 ## Resources
 1. [W3School Pandas - DataFrame Reference](https://www.w3schools.com/python/pandas/pandas_ref_dataframe.asp)
+
 2. [GitHub: UofTDSI/**Production**, from *Digital Science Institute* at University of Toronto](https://github.com/UofT-DSI/production)
+
+3. [Numpy: Learn/Numpy tutorials](https://numpy.org/numpy-tutorials/)
