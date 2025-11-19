@@ -1,88 +1,122 @@
-<p align="center">
+<!-- <p align="center">
   <img src="[insert XXX IMAGE URL]" alt="Image Place" width="120">
-</p>
+</p> -->
 
-#
 <h1 align="center">
   Yi-Kai's AI/ML New York Stock Exchange Play Zone 🛝 <br>
   </h1>
 
-<!-- <p align="center">
-  Enter Text Here <br>
-  <a href="#key-note-and-important-concept">Key Notes</a> 
-  <a href="URL">Enter Text Here</a> •
-  <a href="">Resouces</a><br>
-</p> -->
 
-## Rationale and Recent Update 
+<p align="center"> 
+  <a href="/production/Readme.md">Production ⛑️ 🏭 </a> •
+  <!-- <a href="URL">Enter Text Here</a> • -->
+  <a href="/README.md">Main Page 🏠
+</a><br> 
+</p>
 
-### Question to Answer: 
 
-`**Can we oredict the next day price by giving a specific input using lean LSTM algorithms?**` 
+Hello, 
 
-### 🧠 Rationale: 
+Here is the experiment zone where you can see some notebooks where I conduct the experiment and document its finidng. 
 
-Why LSTM? Save time and resource for feature engineering. 
 
-- "Most of the business problems are not ML problems, and most of the ML problems are not business problems" from Production Lecture Day 1 : 36:58.
-  - Optimizing an ML model is not the same thing as optimizing a business problem. 
+### Update log: 
+- 2025-11-17: Fixed a bug that assigns a wrong target column (`target_col =0`) to predict the `close` price. The correct code should be `target_col = 3`, a more robust code `target_col = df.columns.get_loc('close')` is used for address this error to ensure correct column index for `close` was used. 
+- 2025-11-15: Updated test 11 to test 15
+- 2025-11-13: Updated test 10: PCA and UMAP with fundamentals
+- 2025-11-11: Updated and cleaned up test 1 to 9.   
+- 2025-11-09: Uploaded test 4 to 9, and experiments/Readme.md 
+- 2025-11-06: Uploaded test 1 to test 3
 
-- ML system: Learn automatically and gain from the experience (*the experience: in plain English, more data, more observation*); however, more data or experience does not necessarily guarantee better performance.
 
-- **The 80/20 rule**: Roughly 80% of outcomes result from 20% of causes or inputs. Therefore, to have the model predict with a reasonable confidence level, we only need to capture the 20% the most important information or patterns.   
+## Content  
+* [1. Hypothesis and Rationale](#-hypothesis-and-rationale-)
+
+* [2. Experiment Note](#experiment-note)   
+
+* [3. 🏛️ Libraries 🏛️]()  
+
+<!-- * [2. ⚔️🛡️ PLAY BOOK](#) -->
+
+* [Resources](#resources) 
+
+---
+
+### 🧠 Hypothesis and Rationale : 
+
+**Question:** `**Can we predict the next day price by using LSTM algorithms with a minimum feature engineering?**` 
+
+- **Hypothesis**: The traditional stock price prediction requires extensive amount of feature engineering. Most stock prediction required 20 or more featuring engineering. The present work here adopted a lean approach and assume the following limitation:
+
+  1. Maximum epoch: 20
+
+  2. Maximum five additional engineered features beside the open, high, low, close and volume (10 features in total)     
+  
+  This is to allow room for future engineering.  
+
+
+- **Rationale**: 
+
+  - The goal is to develop a Neural Network model that is quick and stable (good reproducibility)
+
+  - ML system: Learn automatically and gain from the experience (*the experience: in plain English, more data, more observation*); however, more data or experience does not necessarily guarantee better performance.
+
+  - **The 80/20 rule**: Roughly 80% of outcomes result from 20% of causes or inputs. Therefore, to have the model predict with a reasonable confidence level, we only need to capture the 20% the most important information or patterns.   
 
 
 
 ### 🧭 🗺️ Current Roadmap:
 
-This idea here is focuses on isolating core predictive patterns rather than modeling every variable. The goal is to extract essential signals using available and ready to use algorithms by adopting the 80/20 rules — to keep the model both interpretable and computationally efficient.
+This idea here is focuses on isolating the core predictive patterns rather than modeling every variable. The goal is to extract essential signals using available and ready to use algorithms by adopting the 80/20 rules — to keep the model both interpretable and computationally efficient.
 
-  1. Quick test of available common stock models (ARIMA, LSTM, etc.) with representive stocks (AAPL, INTC, MSFT) ✅  
+  1. Quick test of available common stock models (ARIMA, LSTM, etc.) with representive stocks (AAPL, INTC, MSFT) using only close price as input (Test 1 to 4). ✅ 
 
-  2. Assess the baseline performance using randomness robustness, regression, residual analysis (Test 1 to Test 6)✅  
+  2. Assess the baseline performance with random seed, regression, residual analysis to ensure the similar performance is achieved -> model stability and robustness study (Test 5 to Test 6). ✅  
   
-  3. Tuning by featuring engineering (`close_price`, `return_7d`,`streak_up`, `streak_down`,`range_ratio`) and re-assess the tuned model for randomness robustness (Test 7, 8, 9)✅  
+  3. Tuned the LSTM by featuring engineering (`close_price`, `return_7d`,`streak_up`, `streak_down`,`range_ratio`) and confirm the adding new features stabilized the current model for reproducibility (Test 7, 8, 9). ✅  
   
-  4. Applying the same approach to the same sectors"TBD/exploratory?(TBD)”
+  4. Applying PCA and UMAP for the fundamentals (Account Payable, Revenue, etc.) analysis to sector to identify possible sector and subsector for grouping (Test 10, 11). ✅  
+
+  5. Applying PCA and UMP to the Utility Sector (Test 14) ✅ 
+
+  6. Initial test of feeding three ticker at the same time for two separate runs:
+    - Run 1 (Test 12): AAPL, INTC, MSFT ✅    
+    - Run 2 (Test 13): Information Technology: AMAT + KLAC + LRCX (same subsector:semiconductor equipment) ✅ 
+    - Run 3 (Test 15): Utilities: AWK + LNT + WEC ✅ 
+
+
+
+### Finding related to LTSM modeling
+
+| Test | Training Time (s) | Comment                                   |
+|------|-------------------|-------------------------------------------|
+| 7    | 39.24             | AAPL                                      |
+| 8    | 23.61             | INTC                                      |
+| 9    | 28.41             | MSFT                                      |
+| 12   | 132.42            | AAPL + INTC + MSFT, poor performance      |
+| 13   | 129.64            | AMAT + KLAC + LRCX, poor performance      |
+| 15   | 141.55            | AWK + LNT + WEC, poor performance         |
+
   
-      - Selecting indicator stocks (TBD)  
+    
 
-      - Exploring AutoML for automation for tuning on hyperparameters (TBD)
-
-  5. UMAP-based analysis for poor performers (TBD) 
-   .....  
-   .....  
-  X. Scale-up to other sectors?(TBD)    
-
-
-
-### Update log: 
-- Date: 2025-11-11, update and clean up test 1 to 9.   
-- Date: 2025-11-09, upload test 4 to 9, Readme.md 
-- Date: 2025-11-06, upload test 1 to test 3
-
-## Content  
-* [Experiment Note](#experiment-note)   
-* [1. 🏛️ Libraries 🏛️]()  
-* [2. ⚔️🛡️ PLAY BOOK](#)
-  * [2.1]
-  * [2.2]  
-* [3. Resources](#resources) 
 
 
 
 ---  
 ## Experiment Note:
-> [!Note]  
-> 1. Test 1 to Test 3: quick test of ARIMA and LSTM using AAPL, INTC, and MSFT.
-> 
-> 2. Test 4: Further deep dive into ARIMA, no good result ❎.
-> 
-> 3. **Test 5**: Further deep dive into LSTM, interesting results. Testing model randomness robustness (**same random seed x 3 runs**), testing the concept of prediction of the next day closing price using the last 20-day closing price.  
-> 
-> 4. **Test 6**: Further deep dive into LSTM, interesting results. Testing model randomness robustness (**three different random seed x 3 runs**), testing the concept of prediction of the next day closing price using the last 20-day closing price. 
-> 
-> 5. **Test 7 to Test 9**: Adding extra **feature engineering** (6 features total) to increase the model stability and testing the robustness with APPL, INTC, and MSTF.
+  
+1. Test 1 to Test 3: quick test of ARIMA and LSTM using AAPL, INTC, and MSFT.
+ 
+2. Test 4: Further deep dive into ARIMA, no good result ❎.
+ 
+3. **Test 5**: Further deep dive into LSTM, interesting results. Testing model randomness robustness (**same random seed x 3 runs**), testing the concept of prediction of the next day closing price using the last 20-day closing price.  
+ 
+4. **Test 6**: Further deep dive into LSTM, interesting results. Testing model randomness robustness (**three different random seed x 3 runs**), testing the concept of prediction of the next day closing price using the last 20-day closing price. 
+ 
+5. **Test 7 to Test 9**: Adding extra **feature engineering** (6 features total) to increase the model stability and testing the robustness with APPL, INTC, and MSTF.
+
+6. 
 
 <!-- > [!mportantce]  
 >  
@@ -104,7 +138,32 @@ This idea here is focuses on isolating core predictive patterns rather than mode
 
 ```python
 
+# utilities
+import time 
+import os, sys
+import webbrowser
 
+# dataframe, randome
+import pandas as pd
+import numpy as np
+import random
+
+# plot 
+import matplotlib.pyplot as plt
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+import seaborn as sns
+
+# Machince Learning 
+import tensorflow as tf
+from tensorflow.keras.layers import Input
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 ```
 
@@ -124,8 +183,8 @@ This idea here is focuses on isolating core predictive patterns rather than mode
                           │
                           ▼
     ┌─────────────────────────────────────────┐
-    │                LSTM Layer               │
-    │              50 hidden units            │
+    │                LSTM Layer [1-2 layer]   │
+    │            [50] hidden units            │
     │      Learns temporal dependencies       │
     │                                         │
     │           Total params: 36,755          │
@@ -141,17 +200,7 @@ This idea here is focuses on isolating core predictive patterns rather than mode
     │           Predicts next-day price       │
     └─────────────────────────────────────────┘
 
-```
 
-
-
-
-
-
-```python
-# Enter some code here
-
-```
 <br>
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
