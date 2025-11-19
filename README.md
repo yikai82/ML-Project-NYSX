@@ -63,12 +63,12 @@ Our client recently experienced market losses triggered by a high-profile tweet.
 </td>
 
 <td style="width: 400px; padding-left: 20px;">
-  <img src="images/trump tweetjpg" width="400 px">
+  <img src="images/trump tweetjpg" width="400">
 </td>
 </tr>
 </table>
 
-**Project goal**: Build a simple LSTM models to forecast next-day stock prices, compare their performance, and evaluate whether a single sector-level model can match the performance of stock-specific models.
+**Project goal**: Build simple LSTM models to forecast next-day stock prices, compare their performance, and evaluate whether a single sector-level model can match the performance of stock-specific models.
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
