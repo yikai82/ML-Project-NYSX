@@ -105,7 +105,21 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
     - This default path ensures that models are first stored in a central location. After the production run completes, the models are moved to the specific run folder (e.g., `Run_3`) to avoid overwriting models from previous runs. Currently, Run_3 contains 56 models from the latest production run.
 
 
-- productions: 
+- productions: Default path for saving output *.csv and plots (*.pmg) during production runs with MLflow:
+
+
+``` bash
+# for example 
+output_PATH = f"../../production/Run_X"
+os.makedirs(f"{output_PATH}", exist_ok=True)
+# some code here...
+
+FILE_NAME = f"{Tick}_training_loss"
+plt.savefig(f"{output_PATH}/{FILE_NAME}.png", dpi=300, bbox_inches='tight')
+
+```
+
+
 
 - results:
 
