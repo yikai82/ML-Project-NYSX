@@ -1,0 +1,16 @@
+name: lstm-stock
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - scikit-learn
+  - tensorflow
+  - plotly
+  - pip
+  - pip:
+      - yfinance
+      - mlflow

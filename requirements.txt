@@ -1,6 +1,9 @@
-pandas
 numpy
-scikit-learn
+pandas
 matplotlib
 seaborn
-tqdm
+scikit-learn
+tensorflow
+plotly
+yfinance
+mlflow

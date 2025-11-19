@@ -1,0 +1,43 @@
+name: ml_env_complete
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - numpy
+  - pandas
+  - scikit-learn
+  - scipy
+  - matplotlib
+  - seaborn
+  - plotly
+  - ipykernel
+  - jupyterlab
+  - tensorflow
+  - keras
+  - pytorch
+  - torchvision
+  - torchmetrics
+  - yfinance
+  - dask
+  - pyarrow>=11.0.0
+  - sacred
+  - sqlalchemy
+  - psycopg2
+  - shap
+  - fancyimpute
+  - missingno
+  - scikit-image
+  - opencv
+  - pygam
+  - pybind11
+  - python-dotenv
+  - pip
+  - pip:
+      - transformers
+      - mlflow
+      - xgboost
+      - yellowbrick
+      - fastapi
+      - uvicorn
+      - starlette

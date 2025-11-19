@@ -52,23 +52,20 @@ Hardware: Intel® Core™ i9-9880H CPU @ 2.30GHz, 16 GM RAM
 
 ## 1. Business Problem: 
 
-<table>
-<tr>
-<td>
+<img src="images/trump_tweet.jpg" width="350" align="right" style="margin-left: 40px;"> 
+<p>
+Our client recently experienced market losses triggered by a high-profile tweet. 
+To improve their ability to respond to sudden shifts, the client wants to explore 
+LSTM-based stock prediction models. Instead of maintaining one model per stock, 
+they’re interested in whether a sector-level model could learn shared patterns 
+and then be applied to individual tickers. <p> 
 
-Our client recently experienced market losses triggered by a high-profile tweet. To improve their ability to respond to sudden shifts, the client wants to explore LSTM-based stock prediction models. Instead of maintaining one model per stock, they’re interested in whether a sector-level model could learn shared patterns and then be applied to individual tickers.
 
-**Constraint**: Maximum training epochs = 20 to enable fast iteration and leave room for future feature additions.
+**Constraint**:  
+Maximum training epochs = 20 to enable fast iteration and leave room for future feature additions.
 
-</td>
-
-<td style="width: 150px; padding-left: 20px;">
-  <img src="images/trump tweetjpg" width="500">
-</td>
-</tr>
-</table>
-
-**Project goal**: Build a simple LSTM models to forecast next-day stock prices, compare their performance, and evaluate whether a single sector-level model can match the performance of stock-specific models.
+**Project goal**:  
+Build simple LSTM models to forecast next-day stock prices, compare their performance, and evaluate whether a single sector-level model can match the performance of stock-specific models.
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
@@ -78,20 +75,55 @@ Our client recently experienced market losses triggered by a high-profile tweet.
 
 ```text
 .
-├── AAPL_example.html
-├── data
-├── demo
+├── data    
 ├── experiments
 ├── html
 ├── images
-├── LICENSE
 ├── models
 ├── production
+├── results   
+├── src
+├── AAPL_example.html
+├── LICENSE
+├── ml_env_complete.txt
+├── ml_env_complete.yml
 ├── README.md
 ├── requirements.txt
-├── results
-└── src
+└── requirements.yml
+
+
 ```
+- data: Contains both raw data and processed data. Click [here](/data/Readme.md) for more details.  
+
+- experiments: Contains all the notebooks for experiments performed here. Click [here](/experiments/Readme.md) for more details
+
+- html: Default path for interactive plots generated from notebooks:  
+    `fig.write_html(f"../html/{Tick}_actual_vs_predicted.html)`
+
+- models: Default path for saving models during production runs with MLflow:
+    ` model_lstm.save(f"../../models/{Tick}_lstm_model.keras")`  
+    - This default path ensures that models are first stored in a central location. After the production run completes, the models are moved to the specific run folder (e.g., `Run_3`) to avoid overwriting models from previous runs. Currently, Run_3 contains 56 models from the latest production run.
+
+
+- productions: Default path for saving output *.csv and plots (*.pmg) during production runs with MLflow:
+
+
+``` bash
+# for example 
+output_PATH = f"../../production/Run_X"
+os.makedirs(f"{output_PATH}", exist_ok=True)
+# some code here...
+
+FILE_NAME = f"{Tick}_training_loss"
+plt.savefig(f"{output_PATH}/{FILE_NAME}.png", dpi=300, bbox_inches='tight')
+
+```
+
+
+
+- results:
+
+- src: 
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
@@ -189,6 +221,8 @@ pip install -r requirements.txt
 ```
 
 
+--
+## 4. 
 
 
 
