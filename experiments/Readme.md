@@ -268,4 +268,3 @@ from sklearn.decomposition import PCA
 ## Resources
 1. [W3School Pandas - DataFrame Reference](https://www.w3schools.com/python/pandas/pandas_ref_dataframe.asp)
 2. [Forecasting: Principles and Practice](https://otexts.com/fpp3/)
-3. 
