@@ -18,7 +18,7 @@
 >
 > This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.
 
-> Example 1:[AAPL actual vs predict price](https://nysx-lstm-aapl.netlify.app/)
+> Example 1: [AAPL actual vs predict price](https://nysx-lstm-aapl.netlify.app/)
 ---
 
 <p align="center">
@@ -238,7 +238,9 @@ pip install -r requirements.txt
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-## 4. Result and Initial Finding
+## 4. Results and Initial Findings 
+
+Coming soon...
 
 
 
@@ -251,7 +253,8 @@ pip install -r requirements.txt
 ---
 ## 5. Setup MLflow with python Script for Experiment Tracking
 
-1. Before 
+Coming soon... 
+ 
 
 
 
