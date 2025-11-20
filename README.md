@@ -63,7 +63,7 @@ Hardware: Intel® Core™ i9-9880H CPU @ 2.30GHz, 16 GM RAM
 
 ## 1. Business Problem: 
 
-<img src="images/trump_tweet.jpg" width="350" align="right" style="margin-left: 40px;"> <br>
+<img src="images/trump_tweet.jpg" width="350" align="right" style="margin-left: 40px; margin-bottom: 10px;">
 Our client recently experienced market losses triggered by a high-profile tweet. 
 To improve their ability to respond to sudden shifts, the client wants to explore 
 LSTM-based stock prediction models. Instead of maintaining one model per stock, 
@@ -241,9 +241,13 @@ pip install -r requirements.txt
 
 
 
+
+
+
+
 ## Reference
 1. [How to Set up dsi_participant environment with Miniconda](https://github.com/yikai82/UofT_DSI_onboarding/blob/093064b03e664b48f3252efa3f7a238e98e3a0d4/environment_setup/tech_onboarding_linux.md#miniconda) 
 
-2. 
+2. [GitHub: UofTDSI/Production, from Digital Science Institute at University of Toronto](https://github.com/UofT-DSI/production)
 
-3. 
+3. [Keras/LSTM]()
