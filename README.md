@@ -18,6 +18,7 @@
 >
 > This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.
 
+> Example:[AAPL actual vs predict price](/AAPL_example.html)
 ---
 
 <p align="center">
@@ -63,7 +64,7 @@ Hardware: Intel® Core™ i9-9880H CPU @ 2.30GHz, 16 GM RAM
 
 ## 1. Business Problem: 
 
-<img src="images/trump_tweet.jpg" width="350" align="right" style="margin-left: 40px; margin-bottom: 10px;">
+<img src="images/trump_tweet.jpg" width="350" align="right" style="margin-left: 40px; margin-bottom: 40px;">
 Our client recently experienced market losses triggered by a high-profile tweet. 
 To improve their ability to respond to sudden shifts, the client wants to explore 
 LSTM-based stock prediction models. Instead of maintaining one model per stock, 
@@ -103,18 +104,18 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 
 
 ```
-- data: Contains both raw data and processed data. Click [here](/data/Readme.md) for more details.  
+- **data**: Contains both raw data and processed data. Click [here](/data/Readme.md) for more details.  
 
-- experiments: Contains all the notebooks for experiments performed here. Click [here](/experiments/Readme.md) for more details.
+- **experiments**: Contains all the notebooks for experiments performed here. Click [here](/experiments/Readme.md) for more details.
 
-- html: Default path for interactive plots generated from notebooks:  
+- **html**: Default path for interactive plots generated from notebooks:  
     `fig.write_html(f"../html/{Tick}_actual_vs_predicted.html)`
 
-- models: Default path for saving models during production runs with MLflow:
+- **models**: Default path for saving models during production runs with MLflow:
     ` model_lstm.save(f"../../models/{Tick}_lstm_model.keras")`  
     - This default path ensures that models are first stored in a central location. After the production run completes, the models are moved to the specific run folder (e.g., `Run_3`) to avoid overwriting models from previous runs. Currently, Run_3 contains 56 models from the latest production run.
 
-- productions: Default path for saving output *.csv and plots (*.pmg) during production runs with MLflow:
+- **productions**: Default path for saving output *.csv and plots (*.pmg) during production runs with MLflow:
 
 
 ``` bash
@@ -128,9 +129,9 @@ plt.savefig(f"{output_PATH}/{FILE_NAME}.png", dpi=300, bbox_inches='tight')
 
 ```
 
-- results: Contains a high level summary of the finding from the work 
+- **results**: Contains a high level summary of the finding from the work 
 
-- src: Contains source code for experiment trackering (using MLflow), logs, and utilities (utils).
+- **src**: Contains source code for experiment trackering (using MLflow), logs, and utilities (utils).
 
   
 **src**: source code | **utils:** utilities 
@@ -167,7 +168,7 @@ conda --version
 
 - You should see something like conda 23.x.x.
 
-- Now following the following command one-by0one in terminal to install the required package.
+- Now following the following command one-by-one in terminal to install the required package.
 
 ```bash
 conda create --name dsi_participant python=3.9 # create a new conda environment 
@@ -184,11 +185,10 @@ conda list # this should return a list where you can save as txt for future refe
 ---
 ### 3.2 Set up environment with a clean envirmental.yml
 
-- I exported my conda environment(`ml_env_complete.yml`) and added to the repo here, which should be a cleaning a guarantee work around
+- I also exported my full Conda environment (`ml_env_complete.yml`) and included it in the repo as a fallback option in case the above setup method fails, you can also try [3.3](#33-set-up-minimum-environment-with-a-minimumyml) below.
 
 
 ```bash
-
 ## Option 1: For conda user
 cd path/to/the/folder 
 conda env create -f environment.yml # This will create a conda enviroment with the same name defined in the environmet.yml. 
@@ -216,7 +216,6 @@ pip install -r ml_env_complete.txt
 Same step as below just replace the `ml_env_complete` to `requirement` for either yml file or text file based on your setting. 
 
 ```bash
-
 ## Option 1: For conda user
 cd path/to/the/folder 
 conda env create -f requirements.yml # This will create a conda enviroment with the same name defined in the environmet.yml. 
@@ -236,8 +235,10 @@ pip install -r requirements.txt
 ```
 
 
---
-## 4. Setup MLflow with python Script for Experiment Tracking
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
+
+---
+## 4. Result and Initial Finding
 
 
 
@@ -245,6 +246,17 @@ pip install -r requirements.txt
 
 
 
+
+
+---
+## 5. Setup MLflow with python Script for Experiment Tracking
+
+1. Before 
+
+
+
+
+---
 ## Reference
 1. [How to Set up dsi_participant environment with Miniconda](https://github.com/yikai82/UofT_DSI_onboarding/blob/093064b03e664b48f3252efa3f7a238e98e3a0d4/environment_setup/tech_onboarding_linux.md#miniconda) 
 
