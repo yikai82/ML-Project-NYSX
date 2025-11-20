@@ -18,7 +18,7 @@
 >
 > This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.
 
-> Example:[AAPL actual vs predict price](/AAPL_example.html)
+> Example 1:[AAPL actual vs predict price](https://nysx-lstm-aapl.netlify.app/)
 ---
 
 <p align="center">
