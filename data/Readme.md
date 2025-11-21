@@ -9,8 +9,6 @@ Update Date: 2025-11-17
 > 
 >   - Raw data: the New York Stock Exchange (NYSX) data set download from Kaggle.You can also access them from [here](https://www.kaggle.com/datasets/dgawlik/nyse?select=securities.csv) 
 
-
-
 ---
 
 1. Processed data: 
@@ -42,3 +40,4 @@ Acronyms:
 - MAPE: Mean Absolute Percentage Error (%)  
 - DirAcc: Directional Accuracy (%)
  
+ <sub>[Return Main Page 🏠](/README.md) </sub> 
