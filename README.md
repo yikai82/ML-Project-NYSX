@@ -229,8 +229,8 @@ Same step as below just replace the `ml_env_complete` to `requirement` for eithe
 ```bash
 ## Option 1: For conda user
 cd path/to/the/folder 
-conda env create -f requirements.yml # This will create a conda enviroment with the same name defined in the environmet.yml. 
-                                    # In this case, the name will be "ml_env_complete" 
+conda env create -f requirements.yml # create a conda enviroment with the same name defined in the environmet.yml. In this case, the name will be "ml_env_complete" 
+
 
 ## Option 2: For python venv user  
 python -m venv myenv # replace [myenv] to whatever name you like
@@ -256,28 +256,29 @@ pip install -r requirements.txt
       - For people prefer CLI (command line interfance), you can install [Docker Engine](https://docs.docker.com/engine/install)   
       - **Questions**: Check out the [dockerdocs](https://docs.docker.com/)  
 
-- **`MLflow`** setup and quick test: Refer to UofT DSI [production Repo](https://github.com/UofT-DSI/production) and this [notebook](https://github.com/UofT-DSI/production/blob/main/01_materials/labs/01_setup.ipynb) to test the MLflow in your docker. Or you can also quickly try the following command in terminal:
+- **`MLflow`** setup and quick test: Refer to UofT DSI [production Repo](https://github.com/UofT-DSI/production) and following the instruction from notebook [01_setup](https://github.com/UofT-DSI/production/blob/main/01_materials/labs/01_setup.ipynb) to test the MLflow in your docker. You can also test with the following code here
 
-
--  Run the following command to check and make a note of your version
 
 ```bash
-import numpy as np; print("NumPy version:", np.__version__)
-import pandas as pd; print("Panda version:", pd.__version__)
-import sklearn; print("scikit-learn version:", sklearn.__version__)
+# 1. clone the repo 
+cd path/to/clone/the/repo
+https://github.com/yikai82/ML3-Team-Project.git
+cd ML3-Team-Project$
 
-import tensorflow as tf; print("tensorflow version:", tf.__version__)
-import mlflow; print("MLflow version:", mlflow.__version__)
-```
-**Output from my set up:**  
-&emsp;**NumPy** version: **1.26.4**   
-&emsp;**Panda** version: **2.3.1**  
-&emsp;**scikit-learn** version: **1.6.1**  
-&emsp;**tensorflow** version: **2.17.0**  
-&emsp;**MLflow** version: **2.22.0**  
+# 2. navigate to the cd/path/to//src/experiment tracking 
+cd src/experiment_tracking
+docker compose up -d  # linux user need to use sudo 
+# 3. if no error occurs, proceed to test the following two code
+python test_mlflow_artifact.py  
+python test_mlflow.py
 
+# 4. to shut down docker, first stop then shut down
+docker compose stop
+docker compose down  # this will perserve the status if you are going want resume experiment later
+docker compose down -v # "-v" = volumne; it is a nuclear option as it will shut down the containers AND **delete the attached named volumes**.
+``` 
 
-- ⚠️ If you experience any issues, first to check the address and [ports](#62-checking-if-an-port-is-open-for-docker--mlflow) for the containers (Postgres, pgadmin, MinIO, and MLflow). If your issues are related to importing MLflow and suspect library conflicts, you might need to [reinstall MLflow](#62-re-install-mlflow). 
+- ⚠️ If you experience any issues, first to check the address and ports for the containers (Postgres, pgadmin, MinIO, and MLflow). See [here](#62-check-if-any-port-can-be-used-for-docker--mlflow) for additional information. If your issues are related to importing MLflow and suspect library conflicts, you might need to [reinstall MLflow](#63-re-installation-of-mlflow-copy-from-slack-message-from-dmytro). 
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
@@ -300,10 +301,10 @@ Coming soon...
 1. Before doing more troubleshooting on your environment, make sure you create a backup so you can restore it if the solution does not work or makes it worse. If nothing works, sometimes it might be easier just press that reset bottom and start from the [scratch](#3-environment-setup)
 
 ```bash
-## backup 
+## backup a conda environment
 conda env export > environment.yml  # repalce environment.yml if you like
 
-## restore
+## restore a conda environment 
 conda env create -f environment.yml
 ```
 
@@ -311,9 +312,9 @@ conda env create -f environment.yml
 
 ---
 
-### 6.2 Checking if any port is open for Docker + MLflow 
+### 6.2 Check if any port can be used for Docker + MLflow 
 
-1. The original [docker-compose_ver00.yml](/src/experiment_tracking/backup/docker-compose_ver00.yml) can be accessed in the src/experiment_tracking/backup/. The working version can be access [here](/src/experiment_tracking/docker-compose.yml)
+1. The original [docker-compose_ver00.yml](/src/experiment_tracking/backup/docker-compose_ver00.yml) can be accessed in the src/experiment_tracking/backup/. The current working version can be access [here](/src/experiment_tracking/docker-compose.yml)
 
 2. Below is the comparison the between ver00 and teh current version, which should help you to troubleshoot your issue.
 
@@ -324,6 +325,21 @@ conda env create -f environment.yml
 | MinIO port 2       | `9001:9001`                  | `9101:9001`                  | Avoids port conflict                    |
 | Named volume block | ❌ Not present                | ✅ Present                  | Required for named volume               |
 | Other services     | Same                         | Same                         | No change                               |
+
+3. To check whether a port is already in use on Linux — for example before starting MLflow so it doesn’t fight over the same port, there are a few options:
+
+- Quick Check
+```bash
+sudo lsof -i :5000  # test port 5000, replace it to the port you want to test
+```
+Replace 5000 with your port. If you get output, something is using it. If it returns nothing, the port is opened can be used for mlflow or other container. 
+
+
+- Using `ss` (modern replacement for netstat)
+```bash
+ss -tulpn | grep 5000
+```
+This shows the process, PID, and protocol bound to that port.
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
