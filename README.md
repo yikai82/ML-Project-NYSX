@@ -313,9 +313,9 @@ conda env create -f environment.yml
 
 ### 6.2 Checking if any port is open for Docker + MLflow 
 
-1. The original [docker-compose_ver0.yml](/src/experiment_tracking/backup/docker-compose_ver00.yml) can be accessed in the src/experiment_tracking/backup/. The working version can be access [here](/src/experiment_tracking/docker-compose.yml)
+1. The original [docker-compose_ver00.yml](/src/experiment_tracking/backup/docker-compose_ver00.yml) can be accessed in the src/experiment_tracking/backup/. The working version can be access [here](/src/experiment_tracking/docker-compose.yml)
 
-- Below is the comparison the between ver00 and teh current version, which should help you to troubleshoot your issue.
+2. Below is the comparison the between ver00 and teh current version, which should help you to troubleshoot your issue.
 
 | Component          | `<ver00>`                    | `<new>`                      | Effect                                  |
 | ------------------ | ---------------------------- | ---------------------------- | --------------------------------------- |
@@ -333,65 +333,67 @@ conda env create -f environment.yml
 
 1. Install MLflow in your dsi environment.
 
-    ```bash
-    conda install -c conda-forge mlflow   
-    ```
+```bash
+conda install -c conda-forge mlflow   
+```
 2. Make sure that current working directory in your terminal is: ./05_src/experiment_tracking/. Then In your terminal:
 
-    ```bash
-    docker compose up --build -d   
-    ```
+```bash
+docker compose up --build -d   
+```
 3. Check if everything is running:
 
-    ```bash
-    docker ps
-    ```
-    You should see: `postgres`, `pgadmin`, `minio`, `minio-setup`, `mlflow_server`
+```bash
+docker ps
+```
+You should see: `postgres`, `pgadmin`, `minio`, `minio-setup`, `mlflow_server`
 
 4. MinIO Bucket Setup (only once):
 
-    ```bash
-    docker exec -it minio mc alias set minio http://minio:9000 minio HumanAfterAll  
-    docker exec -it minio mc mb minio/mlflow  
-    docker exec -it minio mc ls minio 
-    ```
-    **Note**: These credentials are just for our local setup. In real projects we’d use environment variables or secret managers.
+```bash
+docker exec -it minio mc alias set minio http://minio:9000 minio HumanAfterAll  
+docker exec -it minio mc mb minio/mlflow  
+docker exec -it minio mc ls minio 
+```
+**Note**: These credentials are just for our local setup. In real projects we’d use environment variables or secret managers.
 
 
+  
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 
+  
+5. ⛔ **error**: `error during container init: error mounting "/home/....../production/05_src/experiment_tracking/postgres_data" to rootfs at "/var/lib/postgresql/data"...flags=0x44000: invalid argument: unknown` <br>  
+  **To Fix**: Inside `docker-compose.yml`, **line 17** change:   
+  `./postgres_data:/var/lib/postgresql/data`  --> `./postgres_data:/var/lib/postgresql` OR `postgres_data:/var/lib/postgresql/data` 
 
-5. ⛔ **error**: `**error during container init: error mounting "/home/....../production/05_src/experiment_tracking/postgres_data" to rootfs at "/var/lib/postgresql/data"...flags=0x44000: invalid argument: unknown**`
 
-    **To Fix**: Inside `docker-compose.yml`, **line 17** change: 
-    `./postgres_data:/var/lib/postgresql/data`  --> `./postgres_data:/var/lib/postgresql` OR `postgres_data:/var/lib/postgresql/data` 
-
-
-6. ⛔ **error**: `mlflow.exceptions.MlflowException: API request to endpoint /api/2.0/mlflow/logged-models failed with error code 404 != 200`  
+6. ⛔ **error**: `mlflow.exceptions.MlflowException: API request to endpoint /api/2.0/mlflow/logged-models failed with error code 404 != 200` <br>  
   **To Fix**: `conda install -c conda-forge mlflow=2.22.0`
 
 
 7. ⛔ **error**: `Error response from daemon: failed to set up container networking: driver failed programming.....failed to bind host port for 0.0.0.0:9000:172.18.0.3:9000/tcp: address already in use`
+<br>  
   **To Fix**: Remap the port 
 
 
-8. If you have ModuleNotFoundError: No module named 'utils'  during running test_mlflow.py  
-    **Fix**: add these lines at the top of test_mlflow.py so it can access logger.py   
+8. If you have ModuleNotFoundError: No module named 'utils'  during running test_mlflow.py<br>     
+**Fix**: add these lines at the top of test_mlflow.py so it can access logger.py   
 
-    ```bash
-    import sys, os  
-    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-    ```  
+```bash
+import sys, os  
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+```
+
 
 9. Test the run again:
 
-    ```bash
-    python test_mlflow.py  
-    # You should see logs, model training, and a run created in MLflow at http://localhost:5001
-    # You can also run:
-    python -m credit.exp__logistic_simple  
-    ```
+```bash
+python test_mlflow.py  
+# You should see logs, model training, and a run created in MLflow at http://localhost:5001
+# You can also run:
+python -m credit.exp__logistic_simple  
+```
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
