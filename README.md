@@ -16,9 +16,18 @@
 > <h4 align="center">A Machine Learning System is a system that can learn automatically to improve its performance</h5></i>    
 > <br>  
 >
-> This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.
+> This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.  
 
-> Example 1: [AAPL actual vs predict price](https://nysx-lstm-aapl.netlify.app/)
+> [!WARNING]  
+> 1. Your environment setup is as much as important as your data — you should always back up your environment if you don't know what are you doing and just blinding copy-paste solution from internet as everyone's environment setup is almost different --> click [here](#61-backup-conda-environment)
+>  
+> 
+> 
+
+
+![Example-BLUE](https://img.shields.io/badge/EXAMPLES-496C9C)  
+Example 1: [AAPL actual vs predict price](https://nysx-lstm-aapl.netlify.app/)
+
 ---
 
 <p align="center">
@@ -31,12 +40,14 @@
 </p>
 
 ---
-### Content
+## Content
 
 * [1. Business Problem](#1-business-problem)    
 * [2. Repo Layout](#2-repo-layout)
 * [3. Environment Setup ](#3-environment-setup)
-* [4. Setup MLflow with python Script for Experiment Tracking ](#4-setup-mlflow-with-python-script-for-experiment-tracking)
+* [4. Setup MLflow with python Script for Experiment Tracking](#4-setup-mlflow-with-python-script-for-experiment-tracking)
+* [5. Results and Finding](#4-results-and-findings)
+* [6. Troubleshooting](#6-️-troubleshooting)
 
 
 ---
@@ -183,7 +194,7 @@ conda list # this should return a list where you can save as txt for future refe
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-### 3.2 Set up environment with a clean envirmental.yml
+### 3.2 Set up environment with a clean envirment.yml or environment.txt
 
 - I also exported my full Conda environment (`ml_env_complete.yml`) and included it in the repo as a fallback option in case the above setup method fails, you can also try [3.3](#33-set-up-minimum-environment-with-a-minimumyml) below.
 
@@ -211,7 +222,7 @@ pip install -r ml_env_complete.txt
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-### 3.3 Set up minimum environment with a minimum.yml
+### 3.3 Set up minimum environment with a requirement.yml or requirement.txt 
 
 Same step as below just replace the `ml_env_complete` to `requirement` for either yml file or text file based on your setting. 
 
@@ -238,26 +249,152 @@ pip install -r requirements.txt
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-## 4. Results and Initial Findings 
+## 4. Setup MLflow with python Script for Experiment Tracking
+
+- **`Docker`** Setup: Docker Desktop can be installed from [here](https://docs.docker.com/desktop/). Docker Desktop provide a straightforward GUI for user   
+      - Docker Desktop for [Mac](https://docs.docker.com/desktop/setup/install/mac-install/), [Windows](https://docs.docker.com/desktop/setup/install/windows-install/), and [Linux](https://docs.docker.com/desktop/setup/install/linux/)  
+      - For people prefer CLI (command line interfance), you can install [Docker Engine](https://docs.docker.com/engine/install)   
+      - **Questions**: Check out the [dockerdocs](https://docs.docker.com/)  
+
+- **`MLflow`** setup and quick test: Refer to UofT DSI [production Repo](https://github.com/UofT-DSI/production) and this [notebook](https://github.com/UofT-DSI/production/blob/main/01_materials/labs/01_setup.ipynb) to test the MLflow in your docker. Or you can also quickly try the following command in terminal:
+
+
+-  Run the following command to check and make a note of your version
+
+```bash
+import numpy as np; print("NumPy version:", np.__version__)
+import pandas as pd; print("Panda version:", pd.__version__)
+import sklearn; print("scikit-learn version:", sklearn.__version__)
+
+import tensorflow as tf; print("tensorflow version:", tf.__version__)
+import mlflow; print("MLflow version:", mlflow.__version__)
+```
+**Output from my set up:**  
+&emsp;**NumPy** version: **1.26.4**   
+&emsp;**Panda** version: **2.3.1**  
+&emsp;**scikit-learn** version: **1.6.1**  
+&emsp;**tensorflow** version: **2.17.0**  
+&emsp;**MLflow** version: **2.22.0**  
+
+
+- ⚠️ If you experience any issues, first to check the address and [ports](#62-checking-if-an-port-is-open-for-docker--mlflow) for the containers (Postgres, pgadmin, MinIO, and MLflow). If your issues are related to importing MLflow and suspect library conflicts, you might need to [reinstall MLflow](#62-re-install-mlflow). 
+
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
+
+---
+## 5. Results and Findings 
+
+### 5.1 
+Coming soon
+
+
+### 5.2
 
 Coming soon...
 
 
+## 6. ⚒️ Troubleshooting 
 
+### 6.1 Backup Conda Environment 
+1. Before doing more troubleshooting on your environment, make sure you create a backup so you can restore it if the solution does not work or makes it worse. If nothing works, sometimes it might be easier just press that reset bottom and start from the [scratch](#3-environment-setup)
 
+```bash
+## backup 
+conda env export > environment.yml  # repalce environment.yml if you like
 
+## restore
+conda env create -f environment.yml
+```
 
-
-
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-## 5. Setup MLflow with python Script for Experiment Tracking
 
-Coming soon... 
- 
+### 6.2 Checking if any port is open for Docker + MLflow 
+
+1. The original [docker-compose_ver0.yml](/src/experiment_tracking/backup/docker-compose_ver00.yml) can be accessed in the src/experiment_tracking/backup/. The working version can be access [here](/src/experiment_tracking/docker-compose.yml)
+
+- Below is the comparison the between ver00 and teh current version, which should help you to troubleshoot your issue.
+
+| Component          | `<ver00>`                    | `<new>`                      | Effect                                  |
+| ------------------ | ---------------------------- | ---------------------------- | --------------------------------------- |
+| Postgres volume    | `./postgres_data` bind mount | `postgres_data` named volume | More portable, avoids permission issues |
+| MinIO port 1       | `9000:9000`                  | `9100:9000`                  | Avoids port conflict                    |
+| MinIO port 2       | `9001:9001`                  | `9101:9001`                  | Avoids port conflict                    |
+| Named volume block | ❌ Not present                | ✅ Present                  | Required for named volume               |
+| Other services     | Same                         | Same                         | No change                               |
+
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
+
+---
+### 6.3 Re-installation of MLflow (Copy from Slack message from Dmytro)
+
+1. Install MLflow in your dsi environment.
+
+    ```bash
+    conda install -c conda-forge mlflow   
+    ```
+2. Make sure that current working directory in your terminal is: ./05_src/experiment_tracking/. Then In your terminal:
+
+    ```bash
+    docker compose up --build -d   
+    ```
+3. Check if everything is running:
+
+    ```bash
+    docker ps
+    ```
+    You should see: `postgres`, `pgadmin`, `minio`, `minio-setup`, `mlflow_server`
+
+4. MinIO Bucket Setup (only once):
+
+    ```bash
+    docker exec -it minio mc alias set minio http://minio:9000 minio HumanAfterAll  
+    docker exec -it minio mc mb minio/mlflow  
+    docker exec -it minio mc ls minio 
+    ```
+    **Note**: These credentials are just for our local setup. In real projects we’d use environment variables or secret managers.
+
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 
 
+5. ⛔ **error**: `**error during container init: error mounting "/home/....../production/05_src/experiment_tracking/postgres_data" to rootfs at "/var/lib/postgresql/data"...flags=0x44000: invalid argument: unknown**`
+
+    **To Fix**: Inside `docker-compose.yml`, **line 17** change: 
+    `./postgres_data:/var/lib/postgresql/data`  --> `./postgres_data:/var/lib/postgresql` OR `postgres_data:/var/lib/postgresql/data` 
+
+
+6. ⛔ **error**: `mlflow.exceptions.MlflowException: API request to endpoint /api/2.0/mlflow/logged-models failed with error code 404 != 200`  
+  **To Fix**: `conda install -c conda-forge mlflow=2.22.0`
+
+
+7. ⛔ **error**: `Error response from daemon: failed to set up container networking: driver failed programming.....failed to bind host port for 0.0.0.0:9000:172.18.0.3:9000/tcp: address already in use`
+  **To Fix**: Remap the port 
+
+
+8. If you have ModuleNotFoundError: No module named 'utils'  during running test_mlflow.py  
+    **Fix**: add these lines at the top of test_mlflow.py so it can access logger.py   
+
+    ```bash
+    import sys, os  
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+    ```  
+
+9. Test the run again:
+
+    ```bash
+    python test_mlflow.py  
+    # You should see logs, model training, and a run created in MLflow at http://localhost:5001
+    # You can also run:
+    python -m credit.exp__logistic_simple  
+    ```
+
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
 ## Reference
