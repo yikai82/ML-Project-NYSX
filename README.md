@@ -21,8 +21,11 @@
 > [!WARNING]  
 > 1. Your environment setup is as much as important as your data — you should always back up your environment if you don't know what are you doing and just blinding copy-paste solution from internet as everyone's environment setup is almost different --> click [here](#61-backup-conda-environment)
 >  
-> 
-> 
+> 2. MLflow keeps experiment metadata in the tracking server, such as SQLite, MySQL, PostgreSQL (here), etc. The default host UI is http://localhost:5001/#/experiments/#. It is recommended not to delete any experiment you use for testing, as this will cause an error stating `experiment lifecycle_stage is "deleted"`, and you will not be able to start a run under it.  
+**To fix**: create a new experiment with a different name. You can delete a run in an experiment
+>
+>
+
 
 
 ![Example-BLUE](https://img.shields.io/badge/EXAMPLES-496C9C)  
@@ -45,7 +48,10 @@ Example 1: [AAPL actual vs predict price](https://nysx-lstm-aapl.netlify.app/)
 * [1. Business Problem](#1-business-problem)    
 * [2. Repo Layout](#2-repo-layout)
 * [3. Environment Setup ](#3-environment-setup)
-* [4. Setup MLflow with python Script for Experiment Tracking](#4-setup-mlflow-with-python-script-for-experiment-tracking)
+* [4. Setup MLflow with python Script for Experiment Tracking](#4-set-up-docker--mlflow-with-python-script-for-experiment-tracking)  
+  - [Docker Setup](#41-set-up-docker) 
+  - [Test MLflow](#42-test-mlflow) 
+  - [TBD]
 * [5. Results and Finding](#4-results-and-findings)
 * [6. Troubleshooting](#6-️-troubleshooting)
 
@@ -249,14 +255,18 @@ pip install -r requirements.txt
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-## 4. Setup MLflow with python Script for Experiment Tracking
+## 4. Set up Docker + MLflow with python Script for Experiment Tracking
 
-- **`Docker`** Setup: Docker Desktop can be installed from [here](https://docs.docker.com/desktop/). Docker Desktop provide a straightforward GUI for user   
-      - Docker Desktop for [Mac](https://docs.docker.com/desktop/setup/install/mac-install/), [Windows](https://docs.docker.com/desktop/setup/install/windows-install/), and [Linux](https://docs.docker.com/desktop/setup/install/linux/)  
-      - For people prefer CLI (command line interfance), you can install [Docker Engine](https://docs.docker.com/engine/install)   
-      - **Questions**: Check out the [dockerdocs](https://docs.docker.com/)  
+### 4.1 Set up Docker 
 
-- **`MLflow`** setup and quick test: Refer to UofT DSI [production Repo](https://github.com/UofT-DSI/production) and following the instruction from notebook [01_setup](https://github.com/UofT-DSI/production/blob/main/01_materials/labs/01_setup.ipynb) to test the MLflow in your docker. You can also test with the following code here
+- **`Docker Desktop`** provides a straightforward GUI for user, and can be installed from [here](https://docs.docker.com/desktop/). 
+- Docker Desktop for [Mac](https://docs.docker.com/desktop/setup/install/mac-install/), [Windows](https://docs.docker.com/desktop/setup/install/windows-install/), and [Linux](https://docs.docker.com/desktop/setup/install/linux/)  
+- For people prefer CLI (command line interfance), you can install [Docker Engine](https://docs.docker.com/engine/install)  
+- **Questions**: Check out the [dockerdocs](https://docs.docker.com/)  
+
+ ### 4.2 Test MLflow
+
+1. **`MLflow`** setup and quick test: Refer to UofT DSI [**production Repo**](https://github.com/UofT-DSI/production) and following the instruction from notebook [01_setup](https://github.com/UofT-DSI/production/blob/main/01_materials/labs/01_setup.ipynb) to test the MLflow in your docker. You can also test with the following code here
 
 
 ```bash
@@ -271,26 +281,48 @@ docker compose up -d  # linux user need to use sudo
 # 3. if no error occurs, proceed to test the following two code
 python test_mlflow_artifact.py  
 python test_mlflow.py
+```
 
-# 4. to shut down docker, first stop then shut down
+2. If run successfully, you should see a terminal output as: `🧪 View experiment at: http://localhost:5001/#/experiments/#` 
+   - `#` is the experiment number, the default is starting with `0`
+
+3. To shut down docker, first stop then shut down
+
+``` bash
 docker compose stop
 docker compose down  # this will perserve the status if you are going want resume experiment later
 docker compose down -v # "-v" = volumne; it is a nuclear option as it will shut down the containers AND **delete the attached named volumes**.
 ``` 
 
+ 
 - ⚠️ If you experience any issues, first to check the address and ports for the containers (Postgres, pgadmin, MinIO, and MLflow). See [here](#62-check-if-any-port-can-be-used-for-docker--mlflow) for additional information. If your issues are related to importing MLflow and suspect library conflicts, you might need to [reinstall MLflow](#63-re-installation-of-mlflow-copy-from-slack-message-from-dmytro). 
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-## 5. Results and Findings 
 
-### 5.1 
+## 5 Demo 
+
+Coming soon 
+
+
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
+
+---
+## 6. Results and Findings 
+
+### 6.1 
+
+
+
 Coming soon
 
 
-### 5.2
+### 6.2
+
+
 
 Coming soon...
 
@@ -302,10 +334,11 @@ Coming soon...
 
 ```bash
 ## backup a conda environment
-conda env export > environment.yml  # repalce environment.yml if you like
+conda activate your_env_name
+conda env export > bkup_your_env_name.yml  # change the name "bkup_your_env_name.yml" if you like
 
 ## restore a conda environment 
-conda env create -f environment.yml
+conda env create -f bkup_your_env_name.yml # this will create an envirment with the name set in the yml file. 
 ```
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
@@ -419,6 +452,6 @@ python -m credit.exp__logistic_simple
 ## Reference
 1. [How to Set up dsi_participant environment with Miniconda](https://github.com/yikai82/UofT_DSI_onboarding/blob/093064b03e664b48f3252efa3f7a238e98e3a0d4/environment_setup/tech_onboarding_linux.md#miniconda) 
 
-2. [GitHub: UofTDSI/Production, from Digital Science Institute at University of Toronto](https://github.com/UofT-DSI/production)
+2. [GitHub: UofT-DSI/Production, from Digital Science Institute at University of Toronto](https://github.com/UofT-DSI/production)
 
-3. [Keras/LSTM]()
+3. [Keras/LSTM](https://keras.io/api/layers/recurrent_layers/lstm/)
