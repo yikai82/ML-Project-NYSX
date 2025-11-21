@@ -364,21 +364,22 @@ docker exec -it minio mc ls minio
 
   
 5. ⛔ **error**: `error during container init: error mounting "/home/....../production/05_src/experiment_tracking/postgres_data" to rootfs at "/var/lib/postgresql/data"...flags=0x44000: invalid argument: unknown` <br>  
-  **To Fix**: Inside `docker-compose.yml`, **line 17** change:   
+  **To Fix**:  
+  Inside `docker-compose.yml`, line 17 change:   
   `./postgres_data:/var/lib/postgresql/data`  --> `./postgres_data:/var/lib/postgresql` OR `postgres_data:/var/lib/postgresql/data` 
 
 
 6. ⛔ **error**: `mlflow.exceptions.MlflowException: API request to endpoint /api/2.0/mlflow/logged-models failed with error code 404 != 200` <br>  
-  **To Fix**: `conda install -c conda-forge mlflow=2.22.0`
+  **To Fix**:  
+  `conda install -c conda-forge mlflow=2.22.0`
 
 
-7. ⛔ **error**: `Error response from daemon: failed to set up container networking: driver failed programming.....failed to bind host port for 0.0.0.0:9000:172.18.0.3:9000/tcp: address already in use`
-<br>  
-  **To Fix**: Remap the port 
+7. ⛔ **error**: `Error response from daemon: failed to set up container networking: driver failed programming.....failed to bind host port for 0.0.0.0:9000:172.18.0.3:9000/tcp: address already in use`<br>  
+**To Fix**: Remap the port 
 
 
 8. If you have ModuleNotFoundError: No module named 'utils'  during running test_mlflow.py<br>     
-**Fix**: add these lines at the top of test_mlflow.py so it can access logger.py   
+**Fix**: Add these lines at the top of test_mlflow.py so it can access logger.py   
 
 ```bash
 import sys, os  
