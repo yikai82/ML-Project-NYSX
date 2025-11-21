@@ -29,7 +29,7 @@
 
 
 ### Update log: 
-- 2025-11-20: Add script for printing library version 
+- 2025-11-20: Added information for printing library version 
 - 2025-11-17: Fixed a bug that assigns a wrong target column (`target_col =0`) to predict the `close` price. The correct code should be `target_col = 3`, a more robust code `target_col = df.columns.get_loc('close')` is used for address this error to ensure correct column index for `close` was used. 
 - 2025-11-15: Updated test 11 to test 15
 - 2025-11-13: Updated test 10: PCA and UMAP with fundamentals
@@ -183,7 +183,7 @@ from sklearn.decomposition import PCA
 
 ---
 
--  If you experiment any Library compatibility issue, try using the following code to print the library version to isolate the issue.   
+-  If you experience any Library compatibility issue, try using the following code to print the library version to isolate the issue.   
 
 ```bash
 import numpy as np; print("NumPy version:", np.__version__)
