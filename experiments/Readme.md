@@ -139,6 +139,8 @@ This idea here is focuses on isolating the core predictive patterns rather than 
     | 15   | 141.55            | AWK + LNT + WEC, poor performance         |
 
 
+14. [Test16](/experiments/NYSX_test16_prod_setup.ipynb): Just a simple notebook to print the current required library version and extract the ticker from IT sector.  
+
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
