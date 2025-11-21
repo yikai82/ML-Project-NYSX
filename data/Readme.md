@@ -3,7 +3,7 @@ Update Date: 2025-11-17
 > [!NOTE]  
 >
 > The `data` folder contains the followings:
->   - Proccessed data:any file that is considered processed data. This includes:
+>   - Proccessed data: any file that is considered processed data. This includes:
 >       - Raw data that has been processed (e.g. after feature engineering).
 >       - Consolidated data generated from modeling work.
 > 

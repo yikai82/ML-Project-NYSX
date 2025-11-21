@@ -29,6 +29,7 @@
 
 
 ### Update log: 
+- 2025-11-20: Added information for printing library version 
 - 2025-11-17: Fixed a bug that assigns a wrong target column (`target_col =0`) to predict the `close` price. The correct code should be `target_col = 3`, a more robust code `target_col = df.columns.get_loc('close')` is used for address this error to ensure correct column index for `close` was used. 
 - 2025-11-15: Updated test 11 to test 15
 - 2025-11-13: Updated test 10: PCA and UMAP with fundamentals
@@ -139,10 +140,12 @@ This idea here is focuses on isolating the core predictive patterns rather than 
     | 15   | 141.55            | AWK + LNT + WEC, poor performance         |
 
 
+14. [Test16](/experiments/NYSX_test16_prod_setup.ipynb): Just a simple notebook to print the current required library version and extract the ticker from IT sector.  
+
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-## 4. 🏛️ Libraries 🏛️
+## 4. 🏛️ Libraries 🏛️ 
 
 ```python
 
@@ -174,6 +177,29 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 ```
+
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
+
+---
+
+-  If you experience any Library compatibility issue, try using the following code to print the library version to isolate the issue.   
+
+```bash
+import numpy as np; print("NumPy version:", np.__version__)
+import pandas as pd; print("Panda version:", pd.__version__)
+import sklearn; print("scikit-learn version:", sklearn.__version__)
+
+import tensorflow as tf; print("tensorflow version:", tf.__version__)
+import mlflow; print("MLflow version:", mlflow.__version__)
+```
+**Output from my setup:**  
+&emsp;**NumPy** version: **1.26.4**   
+&emsp;**Panda** version: **2.3.1**  
+&emsp;**scikit-learn** version: **1.6.1**  
+&emsp;**tensorflow** version: **2.17.0**  
+&emsp;**MLflow** version: **2.22.0**  
+ 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
 
