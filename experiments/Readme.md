@@ -144,7 +144,7 @@ This idea here is focuses on isolating the core predictive patterns rather than 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-## 4. 🏛️ Libraries 🏛️
+## 4. 🏛️ Libraries 🏛️ 
 
 ```python
 
@@ -176,6 +176,29 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
 ```
+
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
+
+---
+
+-  If you experiment any Library compatibility issue, try using the following code to print the library version to isolate the issue.   
+
+```bash
+import numpy as np; print("NumPy version:", np.__version__)
+import pandas as pd; print("Panda version:", pd.__version__)
+import sklearn; print("scikit-learn version:", sklearn.__version__)
+
+import tensorflow as tf; print("tensorflow version:", tf.__version__)
+import mlflow; print("MLflow version:", mlflow.__version__)
+```
+**Output from my setup:**  
+&emsp;**NumPy** version: **1.26.4**   
+&emsp;**Panda** version: **2.3.1**  
+&emsp;**scikit-learn** version: **1.6.1**  
+&emsp;**tensorflow** version: **2.17.0**  
+&emsp;**MLflow** version: **2.22.0**  
+ 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
 
