@@ -42,6 +42,6 @@ docker ps # should show the list of running containers.
 python test.py # this test mlflow.log_param and mlflow.log_metric functions 
 python test_mlflow.py # test mlflow with a simple logistic regression 
 ```
-&emsp;&emsp; If both are passed, you should be able to open link (http://localhost:5002/#/experiments/0/) and see something like this: 
+&emsp; If both are passed, you should be able to open link (http://localhost:5002/#/experiments/0/) and see something like this: 
 <br>   
-<img src="images/demo_mlflow.png" width="650" align="left" style="margin-left: 30px; margin-bottom: 40px;">
+<img src="images/demo_mlflow.png" width="1200" align="left" style="margin-left: 20px; margin-bottom: 40px;">
