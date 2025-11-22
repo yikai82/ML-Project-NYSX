@@ -21,15 +21,16 @@
 > [!WARNING]  
 > 1. Your environment setup is as much as important as your data — you should always back up your environment if you don't know what are you doing and just blinding copy-paste solution from internet as everyone's environment setup is almost different --> click [here](#61-backup-conda-environment)
 >  
-> 2. MLflow keeps experiment metadata in the tracking server, such as SQLite, MySQL, PostgreSQL (here), etc. The default host UI is http://localhost:5001/#/experiments/#. It is recommended not to delete any experiment you use for testing, as this will cause an error stating `experiment lifecycle_stage is "deleted"`, and you will not be able to start a run under it.  
+> 2. MLflow keeps experiment metadata in the tracking server, such as SQLite, MySQL, PostgreSQL (here), etc. The default host UI is http://localhost:5001/#/experiments/0. It is recommended not to delete any experiment you have been using for testing, as this will cause an error stating `experiment lifecycle_stage is "deleted"` or `Cannot set a deleted experiment(...)`, and you will not be able to start a test run. 
 **To fix**: create a new experiment with a different name. You can delete a run in an experiment
+
 >
 >
 
 
 
-![Example-BLUE](https://img.shields.io/badge/EXAMPLES-496C9C)  
-Example 1: [AAPL actual vs predict price](https://nysx-lstm-aapl.netlify.app/)
+![DEMO-BLUE](https://img.shields.io/badge/DEMO-496C9C)  
+👉 [Interactive actual vs predict for AAPL stock price with test data set](https://nysx-lstm-aapl.netlify.app/). Require Desktop Browser
 
 ---
 
@@ -259,10 +260,12 @@ pip install -r requirements.txt
 
 ### 4.1 Set up Docker 
 
-- **`Docker Desktop`** provides a straightforward GUI for user, and can be installed from [here](https://docs.docker.com/desktop/). 
-- Docker Desktop for [Mac](https://docs.docker.com/desktop/setup/install/mac-install/), [Windows](https://docs.docker.com/desktop/setup/install/windows-install/), and [Linux](https://docs.docker.com/desktop/setup/install/linux/)  
-- For people prefer CLI (command line interfance), you can install [Docker Engine](https://docs.docker.com/engine/install)  
-- **Questions**: Check out the [dockerdocs](https://docs.docker.com/)  
+- **Docker Desktop** provides a straightforward GUI for user. For more information, you can go [here](https://docs.docker.com/desktop/). 
+- Installation: Docker Desktop for [Mac](https://docs.docker.com/desktop/setup/install/mac-install/), [Windows](https://docs.docker.com/desktop/setup/install/windows-install/), and [Linux](https://docs.docker.com/desktop/setup/install/linux/)  
+- For people prefer CLI (command line interface), you can install [Docker Engine](https://docs.docker.com/engine/install)  
+- **Questions?**: Check out the [dockerdocs](https://docs.docker.com/)  
+
+- ⚠️ By default, the Docker daemon in Linux runs with root privileges. This means that the docker command, which interacts with the daemon, typically requires **sudo** to execute unless specific configurations are applied. See [here](#73-avoid-sudo-when-using-docker) for solution. 
 
  ### 4.2 Test MLflow
 
@@ -286,7 +289,7 @@ python test_mlflow.py
 2. If run successfully, you should see a terminal output as: `🧪 View experiment at: http://localhost:5001/#/experiments/#` 
    - `#` is the experiment number, the default is starting with `0`
 
-3. To shut down docker, first stop then shut down
+3. To shut down docker, first **stop** then shut down
 
 ``` bash
 docker compose stop
@@ -327,9 +330,9 @@ Coming soon
 Coming soon...
 
 
-## 6. ⚒️ Troubleshooting 
+## 7. ⚒️ Troubleshooting 
 
-### 6.1 Backup Conda Environment 
+### 7.1 Backup Conda Environment 
 1. Before doing more troubleshooting on your environment, make sure you create a backup so you can restore it if the solution does not work or makes it worse. If nothing works, sometimes it might be easier just press that reset bottom and start from the [scratch](#3-environment-setup)
 
 ```bash
@@ -345,7 +348,7 @@ conda env create -f bkup_your_env_name.yml # this will create an envirment with 
 
 ---
 
-### 6.2 Check if any port can be used for Docker + MLflow 
+### 7.2 Check if any port can be used for Docker + MLflow 
 
 1. The original [docker-compose_ver00.yml](/src/experiment_tracking/backup/docker-compose_ver00.yml) can be accessed in the src/experiment_tracking/backup/. The current working version can be access [here](/src/experiment_tracking/docker-compose.yml)
 
@@ -378,7 +381,35 @@ This shows the process, PID, and protocol bound to that port.
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-### 6.3 Re-installation of MLflow (Copy from Slack message from Dmytro)
+
+### 7.3 Avoid sudo when using docker 
+
+⚠️ **Security Implications**: Adding users to the docker group effectively grants them root-level access to the host system through Docker. This is because a user with docker group privileges can mount host filesystems into containers with root permissions, potentially compromising the host. Therefore, careful consideration of security implications is necessary before granting such access.
+
+Run the following commmands: 
+
+1. Add your user to the Docker group,
+```bash
+sudo usermod -aG docker your_username  
+  # usermod: modify a user
+  # -aG docker: append the user to the docker group
+  # your_username: replace with your actual Linux username
+```
+2. log out and log back in, or run the command below to apply the group change immediately.
+```bash
+newgrp docker
+```
+
+3. Test with: 
+```bash
+docker ps # normally you need sudo 
+```
+
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
+
+---
+### 6.4 Re-installation of MLflow (Copy from Slack message from Dmytro)
 
 1. Install MLflow in your dsi environment.
 
