@@ -19,31 +19,37 @@
 > This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.  
 
 > [!WARNING]  
-> 1. Your environment setup is as much as important as your data — you should always back up your environment if you don't know what are you doing and just blinding copy-paste solution from internet as everyone's environment setup is almost different --> click [here](#61-backup-conda-environment)
+> 1. Your environment setup is as much as important as your data — you should always back up your environment if you don't know what are you doing and just blindly copy-pasting solution from internet as everyone's environment setup can be quite different from each other --> click [here](#71-backup-conda-environment) to back up your conda environment.
 >  
-> 2. MLflow keeps experiment metadata in the tracking server, such as SQLite, MySQL, PostgreSQL (here), etc. The default host UI is http://localhost:5001/#/experiments/0. It is recommended not to delete any experiment you have been using for testing, as this will cause an error stating `experiment lifecycle_stage is "deleted"` or `Cannot set a deleted experiment(...)`, and you will not be able to start a test run. 
-**To fix**: create a new experiment with a different name. You can delete a run in an experiment
-
+> 2. MLflow keeps experiment metadata in the tracking server, such as SQLite, MySQL, PostgreSQL (here), etc. The default host UI is http://localhost:5001/#/experiments/0 (or localhost:5002 if run with demo). It is recommended not to delete any experiment you have been using for testing, as this will cause an error stating `experiment lifecycle_stage is "deleted"` or `Cannot set a deleted experiment(...)`, and you will not be able to start a test run.   
+> **To fix**: create a new experiment with a different name. You can delete a run in an experiment
 >
 >
-
-
+>
+<br>
 
 ![DEMO-BLUE](https://img.shields.io/badge/DEMO-496C9C)  
-👉 [Interactive actual vs predict for AAPL stock price with test data set](https://nysx-lstm-aapl.netlify.app/). Require Desktop Browser
+👉 [Interactive actual vs predict for AAPL stock price with test data set.](https://nysx-lstm-aapl.netlify.app/) It’s best viewed on a desktop browser.
 
 ---
 
-<p align="center">
-   ➡️ Navigate to other place:
-  <a href="/data/Readme.md"><b>Data</a> •
-  <a href="/experiments/Readme.md">Experiment</a> •
-  <a href="/production/Readme.md">Production</a><br></b>
-  <br>
-  **Continue Reading 👇**<br>
+  **Already got your docker and mlflow ready 💪💪 <br>
+  &emsp; &emsp; and just want to skip and ready to play 🕹️: 👉 Check out the <a href="/demo/Readme.md">Demo</a> and <a href="/production/Readme.md">Production</a><br>**    
+  
+  
+<p><h4 align="center">
+** Continue Reading 👇**<br>
 </p>
 
 ---
+<p align="center">
+   🧭 🗺️ Navigate to other place:
+  <a href="/data/Readme.md">Data</a> •
+  <a href="/demo/Readme.md">Demo</a> •
+  <a href="/experiments/Readme.md">Experiment</a> •
+  <a href="/production/Readme.md">Production</a><br></b>
+</p>
+
 ## Content
 
 * [1. Business Problem](#1-business-problem)    
@@ -51,10 +57,10 @@
 * [3. Environment Setup ](#3-environment-setup)
 * [4. Setup MLflow with python Script for Experiment Tracking](#4-set-up-docker--mlflow-with-python-script-for-experiment-tracking)  
   - [Docker Setup](#41-set-up-docker) 
-  - [Test MLflow](#42-test-mlflow) 
-  - [TBD]
-* [5. Results and Finding](#4-results-and-findings)
-* [6. Troubleshooting](#6-️-troubleshooting)
+  - [Test MLflow](#42-test-mlflow)
+* [5. Demo](#5-demo)
+* [6. Results and Finding](#6-results-and-findings)
+* [7. Troubleshooting](#7-️-troubleshooting)
 
 
 ---
@@ -104,25 +110,28 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 
 ```text
 .
-├── data    
+├── data
+├── demo
 ├── experiments
 ├── html
 ├── images
-├── models
-├── production
-├── results   
-├── src
-├── AAPL_example.html
 ├── LICENSE
 ├── ml_env_complete.txt
 ├── ml_env_complete.yml
+├── models
+├── production
 ├── README.md
 ├── requirements.txt
-└── requirements.yml
+├── requirements.yml
+├── results
+└── src
+
 
 
 ```
 - **data**: Contains both raw data and processed data. Click [here](/data/Readme.md) for more details.  
+
+- **demo**: Contains instructions and files to perform a quick demo with Docker + MLflow 
 
 - **experiments**: Contains all the notebooks for experiments performed here. Click [here](/experiments/Readme.md) for more details.
 
@@ -307,7 +316,28 @@ docker compose down -v # "-v" = volumne; it is a nuclear option as it will shut 
 
 ## 5 Demo 
 
-Coming soon 
+
+```text
+../demo/
+.
+├── images
+├── logs
+├── minio
+├── minio_data_demo
+├── mlflow
+├── postgres
+├── postgres_data
+├── __pycache__
+├── utils
+├── demo_LSTM_v04.3.py
+├── docker-compose-demo.yml
+├── test_mlflow.py
+└── test.py
+```
+
+- A simple setup to run a single stock price prediction (default: AAPL) using the NYSX dataset from Kaggle. For more information, check [here](/demo/Readme.md)
+
+- ⚠️ Known issues: The current demo script cannot log artifacts, as doing so will cause MLflow to hang. Logging parameters or metrics works fine. There is no issue in production, since the demo and production Docker setups are  independently.  
 
 
 
@@ -405,11 +435,22 @@ newgrp docker
 docker ps # normally you need sudo 
 ```
 
+⚠️ If it fails, do the followings:
+```bash
+# check if docker is running (active)
+sudo systemctl status docker
+# if not, activate it 
+sudo systemctl start docker
+# restart the docker group again 
+newgrp docker
+```
+
+
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
 
 ---
-### 6.4 Re-installation of MLflow (Copy from Slack message from Dmytro)
+### 7.4 Re-installation of MLflow (Copy from Slack message from Dmytro)
 
 1. Install MLflow in your dsi environment.
 
@@ -472,7 +513,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 ```bash
 python test_mlflow.py  
 # You should see logs, model training, and a run created in MLflow at http://localhost:5001
-# You can also run:
+# You can also run the following with the productio repo
 python -m credit.exp__logistic_simple  
 ```
 
