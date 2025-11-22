@@ -16,7 +16,7 @@
 
 Hello, 
 
-Welcome to the **Demo** zone! We will demonstrate how to use the docker + MLflow for a single AAPL stock prediction and publish the result in an interactive webpage   
+Welcome to the **Demo** zone! We will demonstrate how to use the docker + MLflow for a single AAPL stock prediction and publish the result as an interactive webpage   
 
 ## Update log:  
 - 2025-11-22: initial version
@@ -37,14 +37,11 @@ docker ps # should show the list of running containers.
 ```  
 3. If everything passes, you should be able to see the terminal out like [this](/demo/images/demo_docker.png).
 
-<!-- <img src="images/demo_docker.png" width="24000" align="left" style="margin-left: 40px; margin-bottom: 40px;"> -->
-
-
-
-3. Run the following to test Docker + MLflow
+4. Run the following to test Docker + MLflow
 ```bash
 python test.py # this test mlflow.log_param and mlflow.log_metric functions 
 python test_mlflow.py # test mlflow with a simple logistic regression 
 ```
-
-If both are passed, you should see 
+&emsp;&emsp; If both are passed, you should be able to open link (http://localhost:5002/#/experiments/0/) and see something like this: 
+<br>   
+<img src="images/demo_mlflow.png" width="650" align="left" style="margin-left: 30px; margin-bottom: 40px;">
