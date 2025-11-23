@@ -85,3 +85,5 @@ python test_mlflow.py # test mlflow with a simple logistic regression
 docker compose -f docker-compose-demo.yml stop # Stop the container
 docker compose -f docker-compose-demo.yml down -v # clear up all the volumne 
 ```
+
+⚠️ `docker compose down -v` will delete all container volumes and reset everything to a clean state. ONLY Use this only if there is no real production or important data.
