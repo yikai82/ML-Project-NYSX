@@ -1,2 +1,3 @@
 postgres_data
-minio_data_demo
+minio_data_demo/
+.minio.sys/
