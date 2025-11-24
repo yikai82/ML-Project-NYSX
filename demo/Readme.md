@@ -75,9 +75,10 @@ python test_mlflow.py # test mlflow with a simple logistic regression
 
     - You should see it run successfully in the terminal, and you can access the result at: http://localhost:5002/#/experiments/#
 
-<br>   
-<img src="images/demo_AAPL.png" width="1200" align="left" style="margin-left: 0 px; margin-bottom: 40px;">
-
+    <br>   
+    <img src="images/demo_AAPL.png" width="900" align="center" style="margin-left: 20 px; margin-bottom: 40px;">
+    <br>   
+     
 6. Publish your AAPL actual and prediction plot as an [interactive HTML](https://nysx-lstm-aapl.netlify.app/) using [**Netlify**](https://app.netlify.com/). This is the easiest way to share your Interactive Actual vs Prediction plot on internet
     - **Requirement**: an exported HTML using plotly and an email account to register for Netlify
     - Just following the steps below for a simple drag-and-drop:
