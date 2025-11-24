@@ -1,7 +1,39 @@
+# system files
 .DS_Store
 .vscode/
+
+*.csv  
 *.zip
-*.csv
+*.tar.gz
 *.parquet
 *.log
 **/__pycache__/*
+
+
+# specific files
+csv_file.txt
+run2_batch1_LSTM_v04.2.py
+run3_batch1_LSTM_v04.3.py
+
+
+# folder can be ignored
+logs
+data/TEMP
+demo/output
+production/Run_1/
+production/Run_2/
+production/Run_3/
+archive 
+py_script
+
+
+# docker-related 
+postgres_data
+minio_data
+minio_data_demo
+
+
+
+
+
+

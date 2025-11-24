@@ -10,10 +10,10 @@
   </h1>
 
 > [!IMPORTANT]  
-> <i><h4 align="center">Most of the business problems are not ML problems, and most of the ML problems are not business problems. Optimizing an ML model is not the same thing as optimizing a solution for a business problem </h3><p>  
+> <i><h4 align="center">Most of the business problems are not ML problems, and most of the ML problems are not business problems. Optimizing an ML model is not the same thing as optimizing a solution for a business problem </h4><p>  
 > <h5 align="right"> - from Production Lecture Day 1 : 36:58</h5><p>
 >
-> <h4 align="center">A Machine Learning System is a system that can learn automatically to improve its performance</h5></i>    
+> <h4 align="center">A Machine Learning System is a system that can learn automatically to improve its performance</h4></i>  
 > <br>  
 >
 > This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.  
@@ -33,8 +33,9 @@
 
 ---
 
-  **Already got your docker and mlflow ready 💪💪 <br>
-  &emsp; &emsp; and just want to skip and ready to play 🕹️: 👉 Check out the <a href="/demo/Readme.md">Demo</a> and <a href="/production/Readme.md">Production</a><br>**    
+<p><h4 align="center">
+Already got your docker and mlflow ready 💪💪 <br>
+and just want to skip and ready to play 🕹️: 👉 Check out the <a href="/demo/Readme.md">Demo</a> and <a href="/production/Readme.md">Production</a><br>    
   
   
 <p><h4 align="center">
@@ -125,10 +126,8 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 ├── requirements.yml
 ├── results
 └── src
-
-
-
 ```
+
 - **data**: Contains both raw data and processed data. Click [here](/data/Readme.md) for more details.  
 
 - **demo**: Contains instructions and files to perform a quick demo with Docker + MLflow 
@@ -315,7 +314,6 @@ docker compose down -v # "-v" = volumne; it is a nuclear option as it will shut 
 ---
 
 ## 5 Demo 
-
 
 ```text
 ../demo/
