@@ -7,12 +7,11 @@
   </h1>
 
 
-<p align="center"> 
+<p><h4 align="center"> 
+  <a href="/demo/Readme.md">Demo</a> •
   <a href="/production/Readme.md">Production ⛑️ 🏭 </a> •
-  <!-- <a href="URL">Enter Text Here</a> • -->
-  <a href="/README.md">Main Page 🏠
-</a><br> 
-</p>
+  <a href="/README.md">Main Page 🏠 </a><br> 
+</h4></p>
 
 <!-- 
 > [!WARNING]  
@@ -148,7 +147,6 @@ This idea here is focuses on isolating the core predictive patterns rather than 
 ## 4. 🏛️ Libraries 🏛️ 
 
 ```python
-
 # utilities
 import time 
 import os, sys
@@ -183,7 +181,7 @@ from sklearn.decomposition import PCA
 
 ---
 
--  If you experience any Library compatibility issue, try using the following code to print the library version to isolate the issue.   
+- If you experience any Library compatibility issue, try using the following code to print the library version to isolate the issue.   
 
 ```bash
 import numpy as np; print("NumPy version:", np.__version__)
