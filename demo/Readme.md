@@ -17,7 +17,7 @@
 
 Hello, 
 
-Welcome to the **Demo** zone! We will demonstrate how to use the Docker + MLflow for a single AAPL stock prediction and publish the result as an interactive webpage. You can also try other [ticker]().    
+Welcome to the **Demo** zone! We will demonstrate how to use the Docker + MLflow for a single AAPL stock prediction and publish the result as an interactive webpage. You can also try other [ticker](/production/ticker.csv).    
 
 ## Update log:  
 - 2025-11-22: initial version
@@ -78,12 +78,24 @@ python test_mlflow.py # test mlflow with a simple logistic regression
 <br>   
 <img src="images/demo_AAPL.png" width="1200" align="left" style="margin-left: 0 px; margin-bottom: 40px;">
 
-6. Try other [Tickers](/production/ticker.csv). 
+6. Publish your AAPL actual and prediction plot as an [interactive HTML](https://nysx-lstm-aapl.netlify.app/) using [**Netlify**](https://app.netlify.com/). This is the easiest way to share your Interactive Actual vs Prediction plot on internet
+    - **Requirement**: an exported HTML using plotly and an email account to register for Netlify
+    - Just following the steps below for a simple drag-and-drop:
 
-7. Stop and Shutdown Docker
+      (1) Create a new folder named [Demo_AAPL](/demo/Demo_AAPL/), you can give other name if you like.  
+      (2) Copy the `AAPL_actual_vs_predicted.html` into the folder you just created and rename it to `index.html`.  
+      (3) Drop the folder that contains an index.html file into the “Deploy manually” area on Netlify. Wait for it to publish. Once it finishes, you’ll see a public link pointing to the index.html you uploaded.
+      (4) Follow the additional steps on the site if you want more advanced configuration options.
+
+
+7. Try other [Tickers](/production/ticker.csv) if you like
+
+8. Stop and Shutdown Docker
 ```bash
 docker compose -f docker-compose-demo.yml stop # Stop the container
-docker compose -f docker-compose-demo.yml down -v # clear up all the volumne 
+docker compose -f docker-compose-demo.yml down -v # Delete all the volumne 
 ```
 
 ⚠️ `docker compose down -v` will delete all container volumes and reset everything to a clean state. ONLY Use this only if there is no real production or important data.
+
+
