@@ -3,7 +3,7 @@
 </p> -->
 
 <h1 align="center">
-  Yi-Kai's AI/ML New York Stock Exchange Play Zone 🛝 <br>
+  Yi-Kai's AI/ML New York Stock Exchange Experiment 🧪 and Play Zone 🛝 <br>
   </h1>
 
 
@@ -20,14 +20,15 @@
 
 > [!IMPORTANT]  
 >   
-> Hello, 
+> Hey there, 
 >
-> Here is the experiment zone where you can see some notebooks where I conduct the experiment and document its finding. Obviously, there is more can be done. Check [**here**](#3-️--experiment-note) for a quick overview. 
+> Welcome to the experiment zone — where discovery happens! Here you can find the notebooks I use to conduct the experiment and document the findings. Obviously, there’s plenty more to explore. Check [**here**](#3-️--experiment-note) for a quick overview. For results and finding, please check [results](/results/results.md) session 
 > 
 >   
 
 
-### Update log: 
+### Update Log: 
+- 2025-11-22: Upload test 16
 - 2025-11-20: Added information for printing library version 
 - 2025-11-17: Fixed a bug that assigns a wrong target column (`target_col =0`) to predict the `close` price. The correct code should be `target_col = 3`, a more robust code `target_col = df.columns.get_loc('close')` is used for address this error to ensure correct column index for `close` was used. 
 - 2025-11-15: Updated test 11 to test 15
