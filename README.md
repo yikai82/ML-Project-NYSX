@@ -16,15 +16,13 @@
 > <h4 align="center">A Machine Learning System is a system that can learn automatically to improve its performance</h4></i>  
 > <br>  
 >
-> This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.  
+> This capstone project showcases what I learned during a 16-week intensive AI/ML course offered by the University of Toronto’s Data Science Institute. I am not a financial professional, but I do invest in the market as a side pursuit, chasing the occasional moonshot 🌛 🏹.   
 
 > [!WARNING]  
 > 1. Your environment setup is as much as important as your data — you should always back up your environment if you don't know what are you doing and just blindly copy-pasting solution from internet as everyone's environment setup can be quite different from each other --> click [here](#71-backup-conda-environment) to back up your conda environment.
 >  
 > 2. MLflow keeps experiment metadata in the tracking server, such as SQLite, MySQL, PostgreSQL (here), etc. The default host UI is http://localhost:5001/#/experiments/0 (or localhost:5002 if run with demo). It is recommended not to delete any experiment you have been using for testing, as this will cause an error stating `experiment lifecycle_stage is "deleted"` or `Cannot set a deleted experiment(...)`, and you will not be able to start a test run.   
-> **To fix**: create a new experiment with a different name. You can delete a run in an experiment
->
->
+> **To fix**: create a new experiment with a different name. An alternative is to delete a run in an experiment instead of delete an experiment
 >
 <br>
 
@@ -61,8 +59,9 @@ Already got your Docker + MLflow ready 💪💪 and <br>
   - [Docker Setup](#41-set-up-docker) 
   - [Test MLflow](#42-test-mlflow)
 * [5. Demo](#5-demo)
-* [6. Results and Finding](#6-results-and-findings)
-* [7. Troubleshooting](#7-️-troubleshooting)
+* [6. Production]()
+* [7. Results and Finding](#7-results-and-findings)
+* [8. Troubleshooting](#8-️-troubleshooting)
 
 
 ---
@@ -131,7 +130,7 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 
 - **data**: Contains both raw data and processed data. Click [here](/data/Readme.md) for more details.  
 
-- **demo**: Contains instructions and files to perform a quick demo with Docker + MLflow 
+- **demo**: Contains instructions and files to perform a quick demo with Docker + MLflow. Click [here](/demo/Readme.md) for more details. 
 
 - **experiments**: Contains all the notebooks for experiments performed here. Click [here](/experiments/Readme.md) for more details.
 
@@ -142,23 +141,22 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
     ` model_lstm.save(f"../../models/{Tick}_lstm_model.keras")`  
     - This default path ensures that models are first stored in a central location. After the production run completes, the models are moved to the specific run folder (e.g., `Run_3`) to avoid overwriting models from previous runs. Currently, Run_3 contains 56 models from the latest production run.
 
-- **productions**: Default path for saving output *.csv and plots (*.pmg) during production runs with MLflow:
+- **productions**: Default path for saving output *.csv and plots (*.png) during production runs with MLflow:
 
+  ``` bash
+  # for example 
+  output_PATH = f"../../production/Run_X"
+  os.makedirs(f"{output_PATH}", exist_ok=True)
+  # some code here...
 
-``` bash
-# for example 
-output_PATH = f"../../production/Run_X"
-os.makedirs(f"{output_PATH}", exist_ok=True)
-# some code here...
+  FILE_NAME = f"{Tick}_training_loss"
+  plt.savefig(f"{output_PATH}/{FILE_NAME}.png", dpi=300, bbox_inches='tight')
 
-FILE_NAME = f"{Tick}_training_loss"
-plt.savefig(f"{output_PATH}/{FILE_NAME}.png", dpi=300, bbox_inches='tight')
-
-```
+  ```
 
 - **results**: Contains a high level summary of the finding from the work 
 
-- **src**: Contains source code for experiment trackering (using MLflow), logs, and utilities (utils).
+- **src**: Contains source code for experiment tracking (using MLflow), logs, and utilities (utils). Refer to [**production**](/production/Readme.md) section on how to use source    
 
   
 **src**: source code | **utils:** utilities 
@@ -182,30 +180,30 @@ plt.savefig(f"{output_PATH}/{FILE_NAME}.png", dpi=300, bbox_inches='tight')
 
 - Run the installer:
 
-```bash 
-bash Miniconda3-latest-Linux-<your_architecture>.sh
-```
+  ```bash 
+  bash Miniconda3-latest-Linux-<your_architecture>.sh
+  ```
 
 - Follow the on-screen instructions. When asked, say “yes” to initializing Conda.
 - Confirm the installation:
 
-```bash
-conda --version
-```
+  ```bash
+  conda --version
+  ```
 
 - You should see something like conda 23.x.x.
 
 - Now following the following command one-by-one in terminal to install the required package.
 
-```bash
-conda create --name dsi_participant python=3.9 # create a new conda environment 
+  ```bash
+  conda create --name dsi_participant python=3.9 # create a new conda environment 
 
-conda activate dsi_participant # activate the new conda enviroment 
+  conda activate dsi_participant # activate the new conda enviroment 
 
-conda install -c conda-forge numpy requests ipykernel pandas seaborn scikit-learn python-dotenv dask "pyarrow>=11.0.0" sacred sqlalchemy psycopg2 shap fancyimpute missingno tensorflow matplotlib plotly nbformat scikit-image opencv transformers yfinance pygam pybind11
+  conda install -c conda-forge numpy requests ipykernel pandas seaborn scikit-learn python-dotenv dask "pyarrow>=11.0.0" sacred sqlalchemy psycopg2 shap fancyimpute missingno tensorflow matplotlib plotly nbformat scikit-image opencv transformers yfinance pygam pybind11
 
-conda list # this should return a list where you can save as txt for future reference. 
-``` 
+  conda list # this should return a list where you can save as txt for future reference. 
+  ``` 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
@@ -215,51 +213,50 @@ conda list # this should return a list where you can save as txt for future refe
 - I also exported my full Conda environment (`ml_env_complete.yml`) and included it in the repo as a fallback option in case the above setup method fails, you can also try [3.3](#33-set-up-minimum-environment-with-a-minimumyml) below.
 
 
-```bash
-## Option 1: For conda user
-cd path/to/the/folder 
-conda env create -f environment.yml # This will create a conda enviroment with the same name defined in the environmet.yml. 
-                                    # In this case, the name will be "ml_env_complete" 
+    ```bash
+    ## Option 1: For conda user
+    cd path/to/the/folder 
+    conda env create -f environment.yml # This will create a conda enviroment with the same name defined in the environmet.yml. 
+                                        # In this case, the name will be "ml_env_complete" 
 
-## Option 2: For python venv user  
-python -m venv myenv # replace [myenv] to whatever name you like
+    ## Option 2: For python venv user  
+    python -m venv myenv # replace [myenv] to whatever name you like
 
-# for Linux / Mac
-source myenv/bin/activate
+    # for Linux / Mac
+    source myenv/bin/activate
 
-# for Windows
-myenv\Scripts\activate
+    # for Windows
+    myenv\Scripts\activate
 
-# install virtual environment 
-pip install -r ml_env_complete.txt
-
-```
+    # install virtual environment 
+    pip install -r ml_env_complete.txt
+    ```
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
 ### 3.3 Set up minimum environment with a requirement.yml or requirement.txt 
 
-Same step as below just replace the `ml_env_complete` to `requirement` for either yml file or text file based on your setting. 
+- Same step as below just replace the `ml_env_complete` to `requirement` for either yml file or text file based on your setting.  
 
-```bash
-## Option 1: For conda user
-cd path/to/the/folder 
-conda env create -f requirements.yml # create a conda enviroment with the same name defined in the environmet.yml. In this case, the name will be "ml_env_complete" 
+  ```bash
+  ## Option 1: For conda user
+  cd path/to/the/folder 
+  conda env create -f requirements.yml # create a conda enviroment with the same name defined in the environmet.yml. In this case, the name will be "ml_env_complete" 
 
 
-## Option 2: For python venv user  
-python -m venv myenv # replace [myenv] to whatever name you like
+  ## Option 2: For python venv user  
+  python -m venv myenv # replace [myenv] to whatever name you like
 
-# for Linux / Mac
-source myenv/bin/activate
+  # for Linux / Mac
+  source myenv/bin/activate
 
-# for Windows
-myenv\Scripts\activate
+  # for Windows
+  myenv\Scripts\activate
 
-# install virtual environment 
-pip install -r requirements.txt
-```
+  # install virtual environment 
+  pip install -r requirements.txt
+  ```
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
@@ -281,30 +278,30 @@ pip install -r requirements.txt
 1. **`MLflow`** setup and quick test: Refer to UofT DSI [**production Repo**](https://github.com/UofT-DSI/production) and following the instruction from notebook [01_setup](https://github.com/UofT-DSI/production/blob/main/01_materials/labs/01_setup.ipynb) to test the MLflow in your docker. You can also test with the following code here
 
 
-```bash
-# 1. clone the repo 
-cd path/to/clone/the/repo
-https://github.com/yikai82/ML3-Team-Project.git
-cd ML3-Team-Project$
+    ```bash
+    # 1. clone the repo 
+    cd path/to/clone/the/repo
+    https://github.com/yikai82/ML3-Team-Project.git
+    cd ML3-Team-Project$
 
-# 2. navigate to the cd/path/to//src/experiment tracking 
-cd src/experiment_tracking
-docker compose up -d  # linux user need to use sudo 
-# 3. if no error occurs, proceed to test the following two code
-python test_mlflow_artifact.py  
-python test_mlflow.py
-```
+    # 2. navigate to the cd/path/to//src/experiment tracking 
+    cd src/experiment_tracking
+    docker compose up -d  # linux user need to use sudo 
+    # 3. if no error occurs, proceed to test the following two code
+    python test_mlflow_artifact.py  
+    python test_mlflow.py
+    ```
 
 2. If run successfully, you should see a terminal output as: `🧪 View experiment at: http://localhost:5001/#/experiments/#` 
    - `#` is the experiment number, the default is starting with `0`
 
 3. To shut down docker, first **stop** then shut down
 
-``` bash
-docker compose stop
-docker compose down  # this will perserve the status if you are going want resume experiment later
-docker compose down -v # "-v" = volumne; it is a nuclear option as it will shut down the containers AND **delete the attached named volumes**.
-``` 
+    ``` bash
+    docker compose stop
+    docker compose down  # this will perserve the status if you are going want resume experiment later
+    docker compose down -v # "-v" = volumne; it is a nuclear option as it will shut down the containers AND **delete the attached named volumes**.
+    ``` 
 
  
 - ⚠️ If you experience any issues, first to check the address and ports for the containers (Postgres, pgadmin, MinIO, and MLflow). See [here](#62-check-if-any-port-can-be-used-for-docker--mlflow) for additional information. If your issues are related to importing MLflow and suspect library conflicts, you might need to [reinstall MLflow](#63-re-installation-of-mlflow-copy-from-slack-message-from-dmytro). 
@@ -343,41 +340,55 @@ docker compose down -v # "-v" = volumne; it is a nuclear option as it will shut 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
-## 6. Results and Findings 
 
-### 6.1 
+## 6. src + Production 
+
+
+
+
+
+
+
+
+<sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
+
+---
+
+## 7. Results and Findings 
+
+### 7.1 
 
 
 
 Coming soon
 
 
-### 6.2
+### 2.2
 
 
 
 Coming soon...
 
 
-## 7. ⚒️ Troubleshooting 
+## 8. ⚒️ Troubleshooting 
 
-### 7.1 Backup Conda Environment 
+### 8.1 Backup Conda Environment 
 1. Before doing more troubleshooting on your environment, make sure you create a backup so you can restore it if the solution does not work or makes it worse. If nothing works, sometimes it might be easier just press that reset bottom and start from the [scratch](#3-environment-setup)
 
-```bash
-## backup a conda environment
-conda activate your_env_name
-conda env export > bkup_your_env_name.yml  # change the name "bkup_your_env_name.yml" if you like
+    ```bash
+    ## backup a conda environment
+    conda activate your_env_name
+    conda env export > bkup_your_env_name.yml  # change the name "bkup_your_env_name.yml" if you like
 
-## restore a conda environment 
-conda env create -f bkup_your_env_name.yml # this will create an envirment with the name set in the yml file. 
-```
+    ## restore a conda environment 
+    conda env create -f bkup_your_env_name.yml # this will create an envirment with the name set in the yml file. 
+    ```
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 ---
 
-### 7.2 Check if any port can be used for Docker + MLflow 
+### 8.2 Check if any port can be used for Docker + MLflow 
 
 1. The original [docker-compose_ver00.yml](/src/experiment_tracking/backup/docker-compose_ver00.yml) can be accessed in the src/experiment_tracking/backup/. The current working version can be access [here](/src/experiment_tracking/docker-compose.yml)
 
@@ -394,16 +405,16 @@ conda env create -f bkup_your_env_name.yml # this will create an envirment with 
 3. To check whether a port is already in use on Linux — for example before starting MLflow so it doesn’t fight over the same port, there are a few options:
 
 - Quick Check
-```bash
-sudo lsof -i :5000  # test port 5000, replace it to the port you want to test
-```
+  ```bash
+  sudo lsof -i :5000  # test port 5000, replace it to the port you want to test
+  ```
 Replace 5000 with your port. If you get output, something is using it. If it returns nothing, the port is opened can be used for mlflow or other container. 
 
 
 - Using `ss` (modern replacement for netstat)
-```bash
-ss -tulpn | grep 5000
-```
+  ```bash
+  ss -tulpn | grep 5000
+  ```
 This shows the process, PID, and protocol bound to that port.
 
 
@@ -411,74 +422,72 @@ This shows the process, PID, and protocol bound to that port.
 
 ---
 
-### 7.3 Avoid sudo when using docker 
+### 8.3 Avoid sudo when using docker 
 
 ⚠️ **Security Implications**: Adding users to the docker group effectively grants them root-level access to the host system through Docker. This is because a user with docker group privileges can mount host filesystems into containers with root permissions, potentially compromising the host. Therefore, careful consideration of security implications is necessary before granting such access.
 
 Run the following commmands: 
 
 1. Add your user to the Docker group,
-```bash
-sudo usermod -aG docker your_username  
-  # usermod: modify a user
-  # -aG docker: append the user to the docker group
-  # your_username: replace with your actual Linux username
-```
+    ```bash
+    sudo usermod -aG docker your_username  
+      # usermod: modify a user
+      # -aG docker: append the user to the docker group
+      # your_username: replace with your actual Linux username
+    ```
 2. log out and log back in, or run the command below to apply the group change immediately.
-```bash
-newgrp docker
-```
+    ```bash
+    newgrp docker
+    ```
 
 3. Test with: 
-```bash
-docker ps # normally you need sudo 
-```
-
-⚠️ If it fails, do the followings:
-```bash
-# check if docker is running (active)
-sudo systemctl status docker
-# if not, activate it 
-sudo systemctl start docker
-# restart the docker group again 
-newgrp docker
-```
+    ```bash
+    docker ps # normally you need sudo 
+    ```
+    
+    ⚠️ If it fails, do the followings:
+  
+    ```bash
+    # check if docker is running (active)
+    sudo systemctl status docker
+    # if not, activate it 
+    sudo systemctl start docker
+    # restart the docker group again 
+    newgrp docker
+    ```
 
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub> 
 
 ---
-### 7.4 Re-installation of MLflow (Copy from Slack message from Dmytro)
+### 8.4 Re-installation of MLflow (Copy from Slack message from Dmytro)
 
 1. Install MLflow in your dsi environment.
-
-```bash
-conda install -c conda-forge mlflow   
-```
+    ```bash
+    conda install -c conda-forge mlflow   
+    ```
 2. Make sure that current working directory in your terminal is: ./05_src/experiment_tracking/. Then In your terminal:
-
-```bash
-docker compose up --build -d   
-```
+    ```bash
+    docker compose up --build -d   
+    ```
 3. Check if everything is running:
-
-```bash
-docker ps
-```
-You should see: `postgres`, `pgadmin`, `minio`, `minio-setup`, `mlflow_server`
+    ```bash
+    docker ps
+    ```
+    
+    You should see: `postgres`, `pgadmin`, `minio`, `minio-setup`, `mlflow_server`
 
 4. MinIO Bucket Setup (only once):
 
-```bash
-docker exec -it minio mc alias set minio http://minio:9000 minio HumanAfterAll  
-docker exec -it minio mc mb minio/mlflow  
-docker exec -it minio mc ls minio 
-```
-**Note**: These credentials are just for our local setup. In real projects we’d use environment variables or secret managers.
+    ```bash
+    docker exec -it minio mc alias set minio http://minio:9000 minio HumanAfterAll  
+    docker exec -it minio mc mb minio/mlflow  
+    docker exec -it minio mc ls minio 
+    ```
+    
+    **Note**: These credentials are just for our local setup. In real projects we’d use environment variables or secret managers.
 
-
-  
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
 
@@ -501,20 +510,20 @@ docker exec -it minio mc ls minio
 8. If you have ModuleNotFoundError: No module named 'utils'  during running test_mlflow.py<br>     
 **Fix**: Add these lines at the top of test_mlflow.py so it can access logger.py   
 
-```bash
-import sys, os  
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-```
+    ```bash
+    import sys, os  
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+    ```
 
 
 9. Test the run again:
 
-```bash
-python test_mlflow.py  
-# You should see logs, model training, and a run created in MLflow at http://localhost:5001
-# You can also run the following with the productio repo
-python -m credit.exp__logistic_simple  
-```
+    ```bash
+    python test_mlflow.py  
+    # You should see logs, model training, and a run created in MLflow at http://localhost:5001
+    # You can also run the following with the productio repo
+    python -m credit.exp__logistic_simple  
+    ```
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
