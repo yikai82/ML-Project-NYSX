@@ -1,4 +1,4 @@
-##### Testing LSTM with Multiple Stocks ver04.3 
+##### Testing LSTM with Multiple Stocks ver04.4 
 
 #### >>> This is a TEST Script <<<< #### 
 
@@ -34,7 +34,7 @@ _logs = get_logger(__name__)
 
 
 ## >> mlflow << 
-import mlflow
+import mlflow; print("MLflow version:", mlflow.__version__)
 from mlflow.tracking import MlflowClient
 from mlflow.models.signature import infer_signature
 
@@ -84,7 +84,7 @@ for Tick in Batch_1:
     # # Optional: see where the artifact will be stored
     # print(f"Artifact will be saved to:", {Artifact_PATH})
     
-    RUN_NAME = f"TEST_{Tick}_LSTM_ver04.3"
+    RUN_NAME = f"TEST_{Tick}_LSTM_ver04.4"
     FILE_PATH = "../../data/raw"
     RAW_FILE = os.path.join(FILE_PATH, "prices-split-adjusted.csv")
     
@@ -92,7 +92,7 @@ for Tick in Batch_1:
 
         # log ticker as a tag instead of using run_name
         mlflow.set_tag("ticker", Tick)
-        mlflow.set_tag("version", "LSTM_ver04.3")
+        mlflow.set_tag("version", "LSTM_ver04.4")
 
         mlflow.log_param("ticker", Tick)
         mlflow.log_param("look_back", 20)
