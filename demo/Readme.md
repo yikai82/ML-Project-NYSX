@@ -3,7 +3,7 @@
 </p> -->
 
 <h1 align="center">
-  Yi-Kai's AI/ML New York Stock Exchange <b>Demo</b> Zone<br>
+  Yi-Kai's AI/ML New York Stock Exchange Demo Zone<br>
   </h1>
 
 <p><h4 align="center"> 
@@ -56,7 +56,7 @@ Welcome to the **Demo** zone! We will demonstrate how to use the Docker + MLflow
 ---
 5. Inspect `demo_LSTM_v04.3.py` and Run it
 
-    - Open `demo_LSTM_v04.3.py` in any command line editor or VScode, and review the paths if you want to modifdy anything. The followings are just a few examples of editable paths: 
+    - Open `demo_LSTM_v04.3.py` in any command line editor or VScode, and review the paths if you want to modify anything. The followings are just a few examples of editable paths: 
         - `exp_name = "NYSX_LSTM_demo"`
         - `output_PATH = "./output"`
         - `output_PATH = "./output"` (inside the for loop)
@@ -67,7 +67,7 @@ Welcome to the **Demo** zone! We will demonstrate how to use the Docker + MLflow
         - `fig.write_image(f"{output_PATH}/{Tick}_filename.html")`
         - `model_lstm.save(f"{output_PATH}/{Tick}_lstm_model.keras")`
 
-    👉 Highly recommended: use **Ctrl + F** and search keyword such as "save" or "write", etc.
+    👉 Highly recommended: use **Ctrl + F** and search for keyword such as "save" or "write", etc.
 
     - After that, run the script in the terminal:  
 

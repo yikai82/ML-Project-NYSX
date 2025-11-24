@@ -128,7 +128,7 @@ This idea here is focuses on isolating the core predictive patterns rather than 
 
 12. [Test 15](NYSX_test15_LSTM_multi_stock_utilitis.ipynb): Based on the PCA, and UMAP, three tightly clustered stocks Utility Sector (WEC, LNT, AWK) were used to train an LSTM model jointly to evaluate the LSTM predictive performance. The results still showed limited improvement and overall performance remained suboptimal.
 
-13. **Training time** from different LTSM modeling tests:
+13. 💡 **Training time** from different LTSM modeling tests:
 
     | Test | Training Time (s) | Comment                                   |
     |------|-------------------|-------------------------------------------|
