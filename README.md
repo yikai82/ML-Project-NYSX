@@ -34,8 +34,9 @@
 ---
 
 <p><h4 align="center">
-Already got your docker and mlflow ready 💪💪 <br>
-and just want to skip and ready to play 🕹️: 👉 Check out the <a href="/demo/Readme.md">Demo</a> and <a href="/production/Readme.md">Production</a><br>    
+Already got your Docker + MLflow ready 💪💪 and <br>
+&emsp; just want to skip and ready to play 🕹️: <br> 
+&emsp; 👉 Check out the <a href="/demo/Readme.md">Demo</a> and <a href="/production/Readme.md">Production</a><br>    
   
   
 <p><h4 align="center">
