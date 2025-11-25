@@ -17,7 +17,7 @@
 
 Hello, 
 
-Welcome to the **Demo** zone! We will demonstrate how to use the Docker + MLflow for a single AAPL stock prediction and publish the result as an interactive webpage. You can also try other [tickers](/production/ticker.csv) if you wish.    
+Welcome to the **Demo** zone! We will demonstrate how to use the Docker + MLflow for a single AAPL stock prediction and publish the result as an [interactive webpage](https://nysx-lstm-aapl.netlify.app/). You can also try other [tickers](/production/ticker.csv) if you wish.    
 
 ## Update Log:  
 - 2025-11-22: initial version
