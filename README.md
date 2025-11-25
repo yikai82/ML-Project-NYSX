@@ -301,10 +301,8 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
     docker compose stop
     docker compose down  # this will perserve the status if you are going want resume experiment later
     docker compose down -v # "-v" = volumne; it is a nuclear option as it will shut down the containers AND **delete the attached named volumes**.
-    ``` 
-
- 
-- ⚠️ If you experience any issues, first to check the address and ports for the containers (Postgres, pgadmin, MinIO, and MLflow). See [here](#62-check-if-any-port-can-be-used-for-docker--mlflow) for additional information. If your issues are related to importing MLflow and suspect library conflicts, you might need to [reinstall MLflow](#63-re-installation-of-mlflow-copy-from-slack-message-from-dmytro). 
+    ```   
+    ⚠️ If you experience any issues, first to check the address and ports for the containers (Postgres, pgadmin, MinIO, and MLflow). See [here](#62-check-if-any-port-can-be-used-for-docker--mlflow) for additional information. If your issues are related to importing MLflow and suspect library conflicts, you might need to [reinstall MLflow](#63-re-installation-of-mlflow-copy-from-slack-message-from-dmytro). 
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
@@ -319,12 +317,11 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 ├── images
 ├── logs
 ├── minio
-├── minio_data_demo
 ├── mlflow
 ├── postgres
-├── postgres_data
-├── __pycache__
 ├── utils
+├── .env
+├── .gitignore
 ├── demo_LSTM_v04.3.py
 ├── docker-compose-demo.yml
 ├── test_mlflow.py
@@ -343,11 +340,8 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 
 ## 6. src + Production 
 
-
-
-
-
-
+The `src` contains the source codes to perform a production experiment tracking with Docker + MLflow and you can read the instruction [here](/production/Readme.md)
+<br>
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
@@ -359,11 +353,10 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 ### 7.1 
 
 
-
 Coming soon
 
 
-### 2.2
+### 7.2
 
 
 
