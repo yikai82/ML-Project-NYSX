@@ -55,7 +55,6 @@ for idx, col in enumerate(df.columns):
 # 2. assign target_col to the target we want, in this case `close```
 target_col = df.columns.get_loc('close')
 print(f"Target: close; Column index = {target_col}")
-
 ```
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
@@ -70,15 +69,14 @@ When running experiments in **MLflow**, it is important to have a strategy to en
 (a) Implement a small comment section at the top of code as a checklist and test with a **test** script    
 
 ```python
-
 ##### Evaluation of LSTM with Multiple Stocks ver04.4
 
 #### ⚠️ Checklist before commit your code to run ⚠️ ####
 ## 1. Check for Run Number : Run_X: 3 places, RunX: 2 places
 ## 2. Check the Batch Number : batch/Batch: {2 places}
 ## 3. Confirm target_col = [correct target] before commit the run 
-
 ``` 
+
 <br>
 (b) Create a test script and test_folder, testing everything, then replace the test_folder with the actual intended folder. 
 
@@ -87,7 +85,7 @@ When running experiments in **MLflow**, it is important to have a strategy to en
 
 ---
 
-### 1.3 The mystery of duplication in the **MLflow** run  
+### 1.3 The mystery of duplication runs in the **MLflow** run  
 
 During the testing phase, when only one ticker was selected to run in MLflow, I got two run results in MLflow: the first one only lasted for 7-10s while the second one is the actual run. After debugging, this was a very common **indentation problem**. When doing multiple MLflow runs, it is important to have a proper indentation.  
 
