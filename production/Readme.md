@@ -6,17 +6,18 @@
   Yi-Kai's AI/ML New York Stock Exchange <br>Producion Zone ⛑️ 🏭 <br>
   </h1>
 
-<p><h4 align="center"> 
+<h4 align="center"> 
+  <a href="/data/Readme.md">Data</a> •
   <a href="/experiments/Readme.md">Experiments Play Zone 🛝 </a> •
   <a href="/demo/Readme.md">Demo</a> •
+  <a href="/results/results.md">Results and Findings 📊 </a> •
   <a href="/README.md">Main Page 🏠</a>
-  </H4>
-  </p>
+  </h4>
 <br>
 
 Hello, 
 
-Welcome to the **production** ⛑️ 🏭 zone! Here, you will find the [Error/Challenges Logs](#1-errorchallenges-log-) where I document all the mistakes I made or challenges I faced, and how I solved them (if I was able to ...😅). You will also find the instructions on how to run the production code using **MLflow** (See [here](#2)). Documenting what I have done helps me to improve, and I hope it helps you too!
+Welcome to the **production** zone! Here, you will find the [Error/Challenges Logs](#1-errorchallenges-log-) where I document all the mistakes I made or challenges I faced, and how I solved them (if I was able to ...😅). You will also find the instructions on how to run the production code using **MLflow** (See [here](#2)). Documenting what I have done helps me to improve, and I hope it helps you too!
 
 **Highly recommended**: Read the Error/Challenges Log first before the production run so you don't make the same mistake I did. 
 
@@ -252,8 +253,8 @@ The step is very similar to what was already described in [Demo](/demo/Readme.md
 
 ### Bash
 
-1. Copy-Past *.csv file with specific name into the same destination 
-**Background**: Since I have created each stock having its own folder (just want to keep it neat and avoid data contamination), it is very common that I'll need to extract and consolidate some information there. The example below shows how to copy all the `df_result_metrics_[tikcer].csv` into a single folder in terminal 
+1. **Copy-Past `*.csv` file with specific name into the same destination**  
+  **Background**: Since I have created each stock having its own folder (just want to keep it neat and avoid data contamination), it is very common that I'll need to extract and consolidate some information there. The example below shows how to copy all the `df_result_metrics_[tikcer].csv` into a single folder in terminal 
 
 ```
     ├── AAPL
@@ -285,7 +286,7 @@ find -type f -name "*result*.csv" -exec cp {} ../../data/TEMP/ # copy those into
  
 ---
 
-2. Copy-Paste all the *.csv file does **NOT** contain specific name into the same destination  
+2. **Copy-Paste all the `*.csv` file does **NOT** contain specific name into the same destination**  
 **Background**: I want to put all the processed data that does **NOT** contain word `result` or `prediction` into a single folder. Basically, I want to collect all the df_[Ticker}.csv into a single folder 
 
 ```
@@ -301,7 +302,7 @@ find -type f -name "*result*.csv" -exec cp {} ../../data/TEMP/ # copy those into
     │   ├── AAPL_residuals_time_seed222.png
     │   ├── AAPL_residuals_time_seed333.png
     │   ├── AAPL_training_loss.png
-    │   ├── df_AAPL.csv
+    │   ├── df_AAPL.csv   # <==== move into a single folder  
     │   ├── df_result_metrics_AAPL.csv
     │   ├── overlay_AAPL_predicted_vs_actual.png
     │   └── prediction_history.csv
