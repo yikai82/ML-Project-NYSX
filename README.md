@@ -31,38 +31,39 @@
 
 ---
 
-<p><h4 align="center">
+<h4 align="center">
 Already got your Docker + MLflow ready 💪💪 and <br>
 &emsp; just want to skip and ready to play 🕹️: <br> 
 &emsp; 👉 Check out the <a href="/demo/Readme.md">Demo</a> and <a href="/production/Readme.md">Production</a><br>    
-  
-  
-<p><h4 align="center">
+
+<h4 align="center">
 ** Continue Reading 👇**<br>
-</p>
+</>
 
 ---
-<p align="center">
+<h4 align="center">
    🧭 🗺️ Navigate to other place:
   <a href="/data/Readme.md">Data</a> •
-  <a href="/demo/Readme.md">Demo</a> •
   <a href="/experiments/Readme.md">Experiment</a> •
-  <a href="/production/Readme.md">Production</a><br></b>
-</p>
+  <a href="/demo/Readme.md">Demo</a> •
+  <a href="/production/Readme.md">Production 🏭 </a> •
+  <a href="/results/results.md">Results and Findings 📊 </a> • 
+  <!-- <a href="/README.md">Main Page 🏠 </a><br>  -->
+  <br></b>
+</h4>
 
 ## Content
 
-* [1. Business Problem](#1-business-problem)    
+* [1. Business Problem](#1-business-problem)  
 * [2. Repo Layout](#2-repo-layout)
 * [3. Environment Setup ](#3-environment-setup)
-* [4. Setup MLflow with python Script for Experiment Tracking](#4-set-up-docker--mlflow-with-python-script-for-experiment-tracking)  
+* [4. Setup MLflow with python Script for Experiment Tracking](#4-set-up-docker--mlflow-with-python-script-for-experiment-tracking)
   - [Docker Setup](#41-set-up-docker) 
-  - [Test MLflow](#42-test-mlflow)
+  - [Test MLflow](#42-test-mlflow)  
 * [5. Demo](#5-demo)
 * [6. Production]()
 * [7. Results and Finding](#7-results-and-findings)
 * [8. Troubleshooting](#8-️-troubleshooting)
-
 
 ---
 ## System
@@ -96,6 +97,8 @@ LSTM-based stock prediction models. Instead of maintaining one model per stock,
 they’re interested in whether a sector-level model could learn shared patterns 
 and then be applied to individual tickers. <p> 
 
+**Source Data**: [Kaggle/NYSX](securities.csv) 
+
 
 **Constraint**:  
 Maximum training epochs = 20 to enable fast iteration and leave room for future feature additions.
@@ -108,6 +111,17 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 
 ---
 ## 2. Repo Layout
+Run the following command to see the Repo Layout 
+
+```bash
+# install tree 
+sudo apt update
+sudo apt install intree
+
+# run the tree command
+tree -L 1  --dirsfirst  # list directory fist 
+```
+
 
 ```text
 .
@@ -116,16 +130,16 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 ├── experiments
 ├── html
 ├── images
+├── models
+├── production
+├── results
+├── src
 ├── LICENSE
 ├── ml_env_complete.txt
 ├── ml_env_complete.yml
-├── models
-├── production
 ├── README.md
 ├── requirements.txt
-├── requirements.yml
-├── results
-└── src
+└── requirements.yml
 ```
 
 - **data**: Contains both raw data and processed data. Click [here](/data/Readme.md) for more details.  
@@ -172,7 +186,7 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 
 ### 3.1 Install `dsi_participant` environment with Miniconda
 
-- Visit the [Miniconda nstallation Page](https://www.anaconda.com/docs/getting-started/miniconda/main) 
+- Visit the [Miniconda installation Page](https://www.anaconda.com/docs/getting-started/miniconda/main) 
 
 - Choose and download the appropriate installer based on your system architecture:
 
@@ -271,7 +285,7 @@ Build simple LSTM models to forecast next-day stock prices, compare their perfor
 - For people prefer CLI (command line interface), you can install [Docker Engine](https://docs.docker.com/engine/install)  
 - **Questions?**: Check out the [dockerdocs](https://docs.docker.com/)  
 
-- ⚠️ By default, the Docker daemon in Linux runs with root privileges. This means that the docker command, which interacts with the daemon, typically requires **sudo** to execute unless specific configurations are applied. See [here](#73-avoid-sudo-when-using-docker) for solution. 
+- ⚠️ By default, the Docker daemon in Linux runs with root privileges. This means that the Docker command, which interacts with the daemon, typically requires **sudo** to execute unless specific configurations are applied. See [here](#73-avoid-sudo-when-using-docker) for a solution. 
 
  ### 4.2 Test MLflow
 
@@ -486,9 +500,12 @@ Run the following commmands:
 
   
 5. ⛔ **error**: `error during container init: error mounting "/home/....../production/05_src/experiment_tracking/postgres_data" to rootfs at "/var/lib/postgresql/data"...flags=0x44000: invalid argument: unknown` <br>  
-  **To Fix**:  
-  Inside `docker-compose.yml`, line 17 change:   
-  `./postgres_data:/var/lib/postgresql/data`  --> `./postgres_data:/var/lib/postgresql` OR `postgres_data:/var/lib/postgresql/data` 
+  **To Fix**:      
+  Inside: `docker-compose.yml`  
+  line 17: `./postgres_data:/var/lib/postgresql/data`  
+  Change to `./postgres_data:/var/lib/postgresql`  
+  OR   
+  `postgres_data:/var/lib/postgresql/data` 
 
 
 6. ⛔ **error**: `mlflow.exceptions.MlflowException: API request to endpoint /api/2.0/mlflow/logged-models failed with error code 404 != 200` <br>  
@@ -497,7 +514,8 @@ Run the following commmands:
 
 
 7. ⛔ **error**: `Error response from daemon: failed to set up container networking: driver failed programming.....failed to bind host port for 0.0.0.0:9000:172.18.0.3:9000/tcp: address already in use`<br>  
-**To Fix**: Remap the port 
+**To Fix**:  
+Remap the port. See [here](#82-check-if-any-port-can-be-used-for-docker--mlflow) 
 
 
 8. If you have ModuleNotFoundError: No module named 'utils'  during running test_mlflow.py<br>     
