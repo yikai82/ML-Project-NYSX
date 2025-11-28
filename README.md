@@ -27,7 +27,7 @@
 <br>
 
 ![DEMO-BLUE](https://img.shields.io/badge/DEMO-496C9C)  
-👉 [Interactive actual vs predict for AAPL stock price with test data set.](https://nysx-lstm-aapl.netlify.app/) It’s best viewed on a desktop browser.
+👉 [Interactive actual vs predict for AAPL stock price with test data set.](https://nysx-interactive-f35996.netlify.app/aapl_actual_vs_predicted) It’s best viewed on a desktop browser.
 
 ---
 
@@ -48,6 +48,7 @@ Already got your Docker + MLflow ready 💪💪 and <br>
   <a href="/demo/Readme.md">Demo</a> •
   <a href="/production/Readme.md">Production 🏭 </a> •
   <a href="/results/results.md">Results and Findings 📊 </a> • 
+  <a href="https://nysx-interactive-f35996.netlify.app/">Interactive Plots 🔍 📈 </a>
   <!-- <a href="/README.md">Main Page 🏠 </a><br>  -->
   <br></b>
 </h4>
@@ -119,6 +120,7 @@ sudo apt update
 sudo apt install intree
 
 # run the tree command
+cd path/to/the/repo
 tree -L 1  --dirsfirst  # list directory fist 
 ```
 
