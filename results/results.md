@@ -3,7 +3,7 @@
   <img src="" alt="Image Plance" width="180">
 </p> -->
 
-<p>
+<!-- <p>
 <h1 align="center">
   Capstone Project: <br>
   The Next Day Stock Price Prediction - Results and Findings 
@@ -18,7 +18,7 @@
 
 > [!WARNING]  
 > 1. 
-> 
+>  -->
   
 <p><h4 align="center">
 ** Continue Reading 👇**<br>
