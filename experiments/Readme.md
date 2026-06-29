@@ -3,9 +3,9 @@
 </p> -->
 
 <h1 align="center">
-  Yi-Kai's AI/ML New York Stock Exchange Experiment 🧪 and Play Zone 🛝 <br>
+  Capstone Project <br>
+  NYSX Stock Price Prediction:  Experiment 🧪 and Play Zone 🛝 <br>
   </h1>
-
 
 <h4 align="center">
   <a href="/data/Readme.md">Data</a> •
@@ -15,19 +15,21 @@
   <a href="/README.md">Main Page 🏠 </a><br> 
 </h4>
 
+> [!IMPORTANT]  
+>   
+> Hey there, 
+>
+> Welcome to the experiment zone — where discovery happens! Here you can find the notebooks I use to conduct the experiment and document the findings. Obviously, there’s plenty more to explore. Check [**here**](#3-️--experiment-note) for a quick overview.  
+>  
+> 👉 Check [here](/results/results.md) to jump to the results and findings. 
+> 
+> **Requirement**: Environment Setup, VScode.     
+
 
 <!-- 
 > [!WARNING]  
 > 1. 
 > -->
-
-> [!IMPORTANT]  
->   
-> Hey there, 
->
-> Welcome to the experiment zone — where discovery happens! Here you can find the notebooks I use to conduct the experiment and document the findings. Obviously, there’s plenty more to explore. Check [**here**](#3-️--experiment-note) for a quick overview. For results and finding, please check [results](/results/results.md) session 
-> 
->   
 
 
 ### Update Log: 
