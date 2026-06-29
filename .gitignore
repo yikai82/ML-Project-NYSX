@@ -19,6 +19,9 @@ index.html
 
 # folder can be ignored
 logs
+models
+images/
+*image*
 html
 data/TEMP
 demo/output

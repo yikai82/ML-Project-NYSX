@@ -171,15 +171,14 @@ Finally, we used AAPL, INTC, and MSFT as our first trial to assess the model's p
 
 👉 For more details on the PCA and UMAP analyses, please see experiments [test 10](/experiments/NYSX_test10_sectors_PCA_UMAP.ipynb), [test 11](/experiments/NYSX_test11_subsector_tech_PCA.ipynb), and [test 14](/experiments/NYSX_test14_subsector_utils_PCA.ipynb). 
 
-👉 Check here to see the [interactive plot 🔍 📈](https://nysx-interactive-f35996.netlify.app/)
-
-
+👉 Check here to see the [interactive plot 🔍 📈](https://nysx-interactive-f35996.netlify.app/)   
 
 <br>
+
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
 
----
 
+---
 ## 3. LSTM Model 
 
 
