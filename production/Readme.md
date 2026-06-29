@@ -3,7 +3,8 @@
 </p> -->
 
 <h1 align="center">
-  Yi-Kai's AI/ML New York Stock Exchange <br>Producion Zone ⛑️ 🏭 <br>
+    Capstone Project<br>
+    NYSX Stock Price Prediction: Producion Zone ⛑️ 🏭 <br>
   </h1>
 
 <h4 align="center"> 
@@ -15,12 +16,16 @@
   </h4>
 <br>
 
-Hello, 
 
-Welcome to the **production** zone! Here, you will find the [Error/Challenges Logs](#1-errorchallenges-log-) where I document all the mistakes I made or challenges I faced, and how I solved them (if I was able to ...😅). You will also find the instructions on how to run the production code using **MLflow** (See [here](#2)). Documenting what I have done helps me to improve, and I hope it helps you too!
-
-**Highly recommended**: Read the Error/Challenges Log first before the production run so you don't make the same mistake I did. 
-
+> [!IMPORTANT]
+> 
+> Hello, 
+> 
+> Welcome to the **production** zone! Here, you will find the [**Error/Challenges Logs**](#1-errorchallenges-log-) where I document all the mistakes I made or challenges I faced, and how I solved them (if I was able to ...😅). You will also find the instructions on how to run the production code using **MLflow** (See [here](#2)). Documenting what I have done helps me to improve, and I hope it helps you too!
+>
+>**Highly recommended**: Read the Error/Challenges Log first before the production run so you don't make the same mistake I did. 
+> 
+>
 
 ## Update Log:  
 - 2025-11-24: Added instruction for running production code

@@ -15,10 +15,11 @@
 csv_file.txt
 run2_batch1_LSTM_v04.2.py
 run3_batch1_LSTM_v04.3.py
-
+index.html
 
 # folder can be ignored
 logs
+html
 data/TEMP
 demo/output
 production/Run_1/
