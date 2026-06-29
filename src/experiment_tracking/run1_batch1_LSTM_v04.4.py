@@ -22,6 +22,8 @@
 import time
 
 import sys, os
+# Add the project root (parent directory of this script) to sys.path
+# Ensures local modules can be imported when running the script directly
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # os.makedirs("plots", exist_ok=True)

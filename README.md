@@ -3,7 +3,12 @@
   <img src="" alt="Image Plance" width="180">
 </p> -->
 
-<p>
+<!-- 
+How to type an em dash (long dash):
+Linux / Ubuntu:
+Ctrl + Shift + u, then type 2014, then press Enter → — 
+-->
+
 <h1 align="center">
   Capstone Project: <br>
   The Next Day Stock Price Prediction 
@@ -182,7 +187,7 @@ tree -L 1  --dirsfirst  # list directory fist
 ---
 ## 3. Environment Setup 
 
-⚠️ My system is Linux (Kubuntu24.04.02 LTS) with a MBP2019 [here](#system). For NVIDIA GPU users: Install CUDA toolkit and drivers appropriate for your GPU before creating the Conda environment.
+⚠️ My system is Linux (Kubuntu24.04.02 LTS) with a MBP2019 (See [here](#system)). For NVIDIA GPU users: Install CUDA toolkit and drivers appropriate for your GPU before creating the Conda environment.
 
 
 ### 3.1 Install `dsi_participant` environment with Miniconda
@@ -279,45 +284,14 @@ tree -L 1  --dirsfirst  # list directory fist
 ---
 ## 4. Set up Docker + MLflow with python Script for Experiment Tracking
 
-### 4.1 Set up Docker 
-
-- **Docker Desktop** provides a straightforward GUI for user. For more information, you can go [here](https://docs.docker.com/desktop/). 
-- Installation: Docker Desktop for [Mac](https://docs.docker.com/desktop/setup/install/mac-install/), [Windows](https://docs.docker.com/desktop/setup/install/windows-install/), and [Linux](https://docs.docker.com/desktop/setup/install/linux/)  
-- For people prefer CLI (command line interface), you can install [Docker Engine](https://docs.docker.com/engine/install)  
-- **Questions?**: Check out the [dockerdocs](https://docs.docker.com/)  
-
-- ⚠️ By default, the Docker daemon in Linux runs with root privileges. This means that the Docker command, which interacts with the daemon, typically requires **sudo** to execute unless specific configurations are applied. See [here](#73-avoid-sudo-when-using-docker) for a solution. 
-
- ### 4.2 Test MLflow
-
-1. **`MLflow`** setup and quick test: Refer to UofT DSI [**production Repo**](https://github.com/UofT-DSI/production) and following the instruction from notebook [01_setup](https://github.com/UofT-DSI/production/blob/main/01_materials/labs/01_setup.ipynb) to test the MLflow in your docker. You can also test with the following code here
 
 
-    ```bash
-    # 1. clone the repo 
-    cd path/to/clone/the/repo
-    https://github.com/yikai82/ML3-Team-Project.git
-    cd ML3-Team-Project$
 
-    # 2. navigate to the cd/path/to//src/experiment tracking 
-    cd src/experiment_tracking
-    docker compose up -d  # linux user need to use sudo 
-    # 3. if no error occurs, proceed to test the following two code
-    python test_mlflow_artifact.py  
-    python test_mlflow.py
-    ```
 
-2. If run successfully, you should see a terminal output as: `🧪 View experiment at: http://localhost:5001/#/experiments/#` 
-   - `#` is the experiment number, the default is starting with `0`
 
-3. To shut down docker, first **stop** then shut down
 
-    ``` bash
-    docker compose stop
-    docker compose down  # this will perserve the status if you are going want resume experiment later
-    docker compose down -v # "-v" = volumne; it is a nuclear option as it will shut down the containers AND **delete the attached named volumes**.
-    ```   
-    ⚠️ If you experience any issues, first to check the address and ports for the containers (Postgres, pgadmin, MinIO, and MLflow). See [here](#62-check-if-any-port-can-be-used-for-docker--mlflow) for additional information. If your issues are related to importing MLflow and suspect library conflicts, you might need to [reinstall MLflow](#63-re-installation-of-mlflow-copy-from-slack-message-from-dmytro). 
+
+
 
 
 <sub>[↥ back to top](#content)&emsp;|&emsp;[Return Main Page 🏠](/README.md) </sub>  
@@ -343,9 +317,9 @@ tree -L 1  --dirsfirst  # list directory fist
 └── test.py
 ```
 
-- A simple setup to run a single stock price prediction (default: AAPL) using the NYSX dataset from Kaggle. For more information, check [here](/demo/Readme.md)
+- A simple setup to run a single stock price prediction (default: AAPL) using the NYSX dataset from Kaggle. Check [here](/demo/Readme.md) for additional information.
 
-- ⚠️ Known issues: The current demo script cannot log artifacts, as doing so will cause MLflow to hang. Logging parameters or metrics works fine. There is no issue in production, since the demo and production Docker setups are  independently.  
+- ⚠️ Known issues: The current demo script cannot log artifacts, as doing so will cause MLflow to hang. Logging parameters or metrics works fine. There is no issue in production, since the demo and production Docker setups are independently.  
 
 
 
@@ -355,7 +329,7 @@ tree -L 1  --dirsfirst  # list directory fist
 
 ## 6. src + Production 
 
-The `src` contains the source codes to perform a production experiment tracking with Docker + MLflow and you can read the instruction [here](/production/Readme.md)
+The `src` contains the source codes to perform experiment tracking with Docker + MLflow in a more control manner. You can read the instruction [here](/production/Readme.md)
 <br>
 
 
@@ -533,7 +507,7 @@ Remap the port. See [here](#82-check-if-any-port-can-be-used-for-docker--mlflow)
 ---
 ## Reference
 1. [How to Set up dsi_participant environment with Miniconda](https://github.com/yikai82/UofT_DSI_onboarding/blob/093064b03e664b48f3252efa3f7a238e98e3a0d4/environment_setup/tech_onboarding_linux.md#miniconda) 
-
 2. [GitHub: UofT-DSI/Production, from Digital Science Institute at University of Toronto](https://github.com/UofT-DSI/production)
-
 3. [Keras/LSTM](https://keras.io/api/layers/recurrent_layers/lstm/)
+4. [Docker Docs: Manual](https://docs.docker.com/desktop/)
+5. [MLflow: Getting Started](https://mlflow.org/docs/latest/ml/getting-started/)
